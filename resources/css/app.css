@@ -23,3 +23,16 @@
     background-color: #211F2A;
     opacity: .6;
 }
+
+.glide__slides {
+    transition: none !important;
+}
+
+.glide__slides li {
+    opacity: 0;
+    transition: all 700ms ease-in-out;
+}
+
+li.glide__slide--active {
+    opacity: 1;
+}
