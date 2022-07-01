@@ -14,7 +14,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 
-    <body class="antialiased bg-primary-light">
+    <body class="antialiased bg-primary-dark">
         <x-page.header/>
 
         <div class="mt-20 py-8">
