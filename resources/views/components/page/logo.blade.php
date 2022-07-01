@@ -1,12 +1,16 @@
-<a href="#" class="flex items-center space-x-1 group">
+<a
+    href="#"
+    class="text-white font-bold text-4xl inline-flex items-center justify-center transition duration-150 hover:text-secondary-light focus:text-secondary-dark"
+>
+    Arkanda
     <span
-        class="text-white font-bold text-4xl px-2 border-4 border-white uppercase rounded-lg inline-flex items-center justify-center transition duration-150 group-hover:text-secondary-light group-hover:border-secondary-light group-focus:text-secondary-dark group-focus:border-secondary-dark"
+        class=""
     >
-        A
+
     </span>
 
     <span
         class="text-white font-bold text-3xl uppercase transition duration-150 group-hover:text-secondary-light group-focus:text-secondary-dark">
-        RKANDA
+
     </span>
 </a>
