@@ -6,7 +6,7 @@
     </span>
 
     <span
-        class="text-white font-bold text-3xl transition duration-150 group-hover:text-secondary-light group-focus:text-secondary-dark">
-        rkanda
+        class="text-white font-bold text-3xl uppercase transition duration-150 group-hover:text-secondary-light group-focus:text-secondary-dark">
+        RKANDA
     </span>
 </a>
