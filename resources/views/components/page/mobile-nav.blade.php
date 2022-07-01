@@ -1,5 +1,6 @@
 <div
     style="display: none;"
+    class="bg-primary-dark"
     x-show="expanded"
     x-collapse
 >

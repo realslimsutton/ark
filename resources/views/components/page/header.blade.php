@@ -1,5 +1,5 @@
 <div
-    @class(['fixed inset-x-0 top-0 opacity-1 bg-primary-dark/80 border-b border-[#292734] shadow-md'])
+    @class(['fixed inset-x-0 top-0 opacity-1 bg-primary-dark/80 border-b border-[#292734] shadow-md z-50'])
     x-data="{expanded: false}"
 >
     <div class="h-20 flex items-center justify-between">
