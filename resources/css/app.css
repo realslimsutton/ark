@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#top-bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: url('/public/images/bg.jpg');
+    background-position: center;
+    background-size: cover;
+    mask-image: linear-gradient(to bottom, rgba(33, 31, 42, 1), rgba(33, 31, 42, 0));
+    opacity: .5;
+}
+
+#top-bg:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #211F2A;
+    opacity: .6;
+}
