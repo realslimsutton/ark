@@ -1,4 +1,4 @@
-<div>
+<div class="hidden md:block">
     <ul class="flex items-center space-x-4">
         <x-page.primary-nav-item to="#" label="Login" :active="false"/>
 
