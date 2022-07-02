@@ -2,7 +2,7 @@
 
 <div
     {{$attributes->class([
-        'flex items-center justify-center space-x-3 p-3 cursor-pointer select-none transition duration-150 hover:bg-primary-accent',
+        'flex items-center justify-center space-x-3 p-3 bg-primary-default cursor-pointer select-none transition duration-150 hover:bg-primary-accent',
         'rounded-tl' => $loop->first,
         'rounded-bl' => $loop->last
     ])}}

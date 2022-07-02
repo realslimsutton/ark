@@ -6,7 +6,7 @@
     </x-landing.section-title>
 
     <div
-        class="w-full bg-primary-default rounded grid md:grid-cols-2"
+        class="w-full grid md:grid-cols-2"
         x-data="{activePostIndex: 0, posts: {{json_encode($latestNews)}}}"
     >
         <div class="border-r border-primary-accent">

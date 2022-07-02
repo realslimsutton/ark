@@ -1,8 +1,8 @@
-<div class="h-full w-full relative">
+<div class="h-full w-full relative bg-primary-default rounded-r">
     <div class="absolute inset-0 overflow-y-auto">
         <div>
             <div
-                class="h-[270px] w-full bg-center bg-no-repeat bg-cover object-cover"
+                class="h-[270px] w-full bg-center bg-no-repeat bg-cover object-cover rounded-tr"
                 x-bind:style="`background-image: url('${posts[activePostIndex]['large_thumbnail']}')`"
             ></div>
         </div>
