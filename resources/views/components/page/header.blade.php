@@ -11,7 +11,12 @@
             </div>
 
             <div>
-                <x-page.secondary-nav/>
+                @guest
+                    <x-page.secondary-nav/>
+                @else
+                    <x-page.account-nav/>
+                @endif
+
                 <x-page.mobile-nav-toggle/>
             </div>
         </x-layout.container>
