@@ -15,10 +15,16 @@
     </head>
 
     <body class="antialiased bg-primary-dark">
-        <x-page.header/>
+        <div class="min-h-screen w-full flex flex-col justify-between">
+            <div>
+                <x-page.header/>
 
-        <div class="mt-20 py-8">
-            @yield('content')
+                <div class="mt-20 py-8">
+                    @yield('content')
+                </div>
+            </div>
+
+            <x-page.footer/>
         </div>
 
         <div id="top-page-bg"></div>
