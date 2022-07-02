@@ -6,10 +6,6 @@
 
         <x-landing.boxes/>
 
-        <div>
-            <x-landing.section-title>
-                LATEST NEWS
-            </x-landing.section-title>
-        </div>
+        <x-landing.latest-news :latest-news="$latestNews"/>
     </x-layout.container>
 @endsection

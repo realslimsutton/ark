@@ -14,11 +14,12 @@ module.exports = {
                 primary: {
                     light: '#211F2A',
                     default: '#292E38',
-                    dark: '#181C23'
+                    dark: '#181C23',
+                    accent: '#2f3541'
                 },
                 secondary: {
-                    light: '#C5163F',
-                    dark: '#DF204D'
+                    light: '#DF204D',
+                    dark: '#C5163F'
                 },
                 tertiary: {
                     light: '#6757D6',

@@ -5,7 +5,7 @@
         <li>
             <a
                 href="#"
-                class="text-sm text-white font-semibold py-3 px-7 rounded transition duration-150 bg-secondary-light hover:bg-secondary-dark focus:bg-secondary-light"
+                class="text-sm text-white font-semibold py-3 px-7 rounded transition duration-150 bg-secondary-dark hover:bg-secondary-light focus:bg-secondary-dark"
             >
                 CREATE ACCOUNT
             </a>
