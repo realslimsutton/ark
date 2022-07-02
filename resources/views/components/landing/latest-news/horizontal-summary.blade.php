@@ -45,7 +45,9 @@
                 </svg>
             </span>
 
-            <span>Sep 18, 2022</span>
+            <span>
+                {{$post['created_at']->format('M d, Y')}}
+            </span>
         </p>
     </div>
 </div>

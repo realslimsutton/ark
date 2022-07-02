@@ -18,11 +18,6 @@
     </div>
 
     <div class="flex items-center justify-between flex-wrap p-4">
-        <a href="#"
-           class="bg-primary-default p-2 rounded text-white font-semibold uppercase text-sm transition duration-150 hover:bg-secondary-light focus:bg-secondary-dark">
-            READ MORE
-        </a>
-
         <p class="flex items-center space-x-1 text-xs text-neutral-400 font-medium">
             <span>
                 <svg
@@ -41,7 +36,16 @@
                 </svg>
             </span>
 
-            <span>Sep 18, 2022</span>
+            <span>
+                {{$post['created_at']->format('M d, Y')}}
+            </span>
         </p>
+
+        <a
+            href="#"
+            class="bg-primary-default p-2 rounded text-white font-semibold uppercase text-sm transition duration-150 hover:bg-secondary-light focus:bg-secondary-dark"
+        >
+            READ MORE
+        </a>
     </div>
 </div>

@@ -19,7 +19,8 @@ class LandingController extends Controller
             'title' => 'SMELL MAGIC IN THE AIR. OR MAYBE A BARBECUE',
             'summary' => 'With what mingled joy and sorrow do I take up the pen to write',
             'small_thumbnail' => 'https://html.nkdev.info/goodgames/assets/images/post-1-sm.jpg',
-            'large_thumbnail' => 'https://html.nkdev.info/goodgames/assets/images/post-1.jpg'
+            'large_thumbnail' => 'https://html.nkdev.info/goodgames/assets/images/post-1.jpg',
+            'created_at' => today()
         ];
 
         return collect([
@@ -53,8 +54,7 @@ class LandingController extends Controller
             ],
             [
                 'id' => 8,
-                ...$post,
-                'summary' => $post['summary'] . ' ' . $post['summary']
+                ...$post
             ]
         ]);
     }

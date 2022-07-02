@@ -41,6 +41,32 @@
     min-width: 20px;
 }
 
+.sidebar-title {
+    position: relative;
+    padding: 16px 16px;
+    margin-bottom: 0;
+    background-color: #2F3541;
+    z-index: 1;
+}
+
+.sidebar-title > span {
+    display: inline-block;
+    padding-right: 23px;
+    background-color: #2F3541;
+}
+
+.sidebar-title:after {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 30px;
+    right: 1px;
+    left: 30px;
+    height: 3px;
+    background-color: #FFFFFF;
+    z-index: -1;
+}
+
 .section-title > span {
     display: block;
     flex: auto;
