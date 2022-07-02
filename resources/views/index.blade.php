@@ -9,7 +9,7 @@
         <x-landing.latest-news :latest-news="$latestNews"/>
 
         <div class="grid md:grid-cols-3 gap-6">
-            <div class="col-span-2">
+            <div class="md:col-span-2">
                 <x-landing.best-selling/>
             </div>
 
