@@ -24,7 +24,17 @@
     opacity: .6;
 }
 
-.glide__slide > div:after {
+#main-slider .glide__slide {
+    display: flex;
+}
+
+#main-slider .glide__slide, #main-slider .glide__slide > div {
+    min-height: 24rem;
+    height: auto;
+    align-items: stretch;
+}
+
+#main-slider .glide__slide > div:after {
     content: '';
     position: absolute;
     top: 0;

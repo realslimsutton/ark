@@ -3,7 +3,7 @@
 <li class="glide__slide">
     <div
         @class([
-            'h-96 w-full bg-center bg-cover bg-no-repeat rounded flex',
+            'min-h-[24rem] w-full bg-center bg-cover bg-no-repeat rounded flex',
             'justify-start' => $align === 'left',
             'justify-end' => $align === 'right',
             'justify-center' => $align === 'center'

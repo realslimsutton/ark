@@ -1,4 +1,4 @@
-<div class="h-96 w-full bg-primary-dark/90 rounded glide">
+<div id="main-slider" class="min-h-[24rem] w-full bg-primary-dark/90 rounded glide">
     <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides">
             <x-landing.slider.slide :image="asset('images/Slider1.jpg')">
