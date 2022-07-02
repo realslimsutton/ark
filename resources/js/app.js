@@ -6,7 +6,7 @@ import '@glidejs/glide/dist/css/glide.theme.css';
 
 new Glide('.glide', {
     type: 'carousel',
-    // autoplay: 5000,
+    autoplay: 5000,
     focusAt: 'center'
 }).mount({ Controls, Autoplay, Images, Swipe });
 
