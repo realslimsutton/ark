@@ -24,6 +24,30 @@
     opacity: .6;
 }
 
+.section-title:before, .section-title:after {
+    content: "";
+    display: block;
+    flex: 100;
+    border-bottom: 4px solid;
+    transform: translateY(-10px);
+    width: 20px;
+    min-width: 20px;
+    @apply border-primary-default;
+}
+
+.section-title:before {
+    flex: 20px;
+    width: 20px;
+    min-width: 20px;
+}
+
+.section-title > span {
+    display: block;
+    flex: auto;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
 #main-slider .glide__slide {
     display: flex;
 }
