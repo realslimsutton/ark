@@ -6,10 +6,10 @@
     </x-landing.section-title>
 
     <div
-        class="w-full grid md:grid-cols-2"
+        class="w-full grid md:grid-cols-2 gap-6 md:gap-0"
         x-data="{activePostIndex: 0, posts: {{json_encode($latestNews)}}}"
     >
-        <div class="border-r border-primary-accent">
+        <div class="border-r border-primary-accent overflow-x-hidden">
             <ul class="divide-y divide-primary-accent">
                 @foreach($latestNews->take(4) as $post)
                     <x-landing.latest-news.horizontal-summary :post="$post" :loop="$loop"/>
@@ -17,9 +17,7 @@
             </ul>
         </div>
 
-        <div>
-            <x-landing.latest-news.detailed-summary/>
-        </div>
+        <x-landing.latest-news.detailed-summary/>
     </div>
 
     @if($latestNews->count() > 4)
