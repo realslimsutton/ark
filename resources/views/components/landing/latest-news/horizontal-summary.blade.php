@@ -21,7 +21,9 @@
             {{$post['title']}}
         </h3>
 
-        <p class="text-neutral-400 mb-4 truncate">
+        <p
+            class="text-neutral-400 mb-4 truncate"
+            x-bind:class="activePostIndex === {{$loop->index}} ? '!text-white' : ''">
             {{$post['summary']}}
         </p>
 
