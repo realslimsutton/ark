@@ -53,7 +53,12 @@ class ArticleResource extends Resource
                             ->searchable()
                             ->required(),
                         Forms\Components\DateTimePicker::make('published_at')
-                            ->label('Published at'),
+                            ->label('Published at')
+                            ->nullable()
+                            ->withoutSeconds()
+                            ->dehydrateStateUsing(function ($state) {
+                                dd($state);
+                            }),
                         Forms\Components\SpatieTagsInput::make('tags')
                     ])
                     ->columns([
@@ -66,9 +71,6 @@ class ArticleResource extends Resource
                 Forms\Components\Card::make()
                     ->schema([
                         Forms\Components\SpatieMediaLibraryFileUpload::make('thumbnail'),
-                        Forms\Components\Placeholder::make('published_at')
-                            ->label('Published at')
-                            ->content(fn(?Article $record): string => $record?->published_at?->diffForHumans() ?? '-'),
                         Forms\Components\Placeholder::make('created_at')
                             ->label('Created at')
                             ->content(fn(?Article $record): string => $record?->created_at?->diffForHumans() ?? '-'),
