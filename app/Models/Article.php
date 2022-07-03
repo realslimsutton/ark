@@ -18,7 +18,9 @@ class Article extends Model implements HasMedia
         'slug',
         'summary',
         'content',
-        'user_id'
+        'user_id',
+        'category_id',
+        'published_at'
     ];
 
     public function user(): BelongsTo

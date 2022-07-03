@@ -287,3 +287,8 @@ input[type="number"], select {
 .filament-tables-row {
     @apply hover:bg-primary-accent !important;
 }
+
+button.text-primary-700 {
+    @apply bg-primary-accent/50 !important;
+    @apply text-secondary-light !important;
+}
