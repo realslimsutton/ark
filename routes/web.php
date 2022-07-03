@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LandingController;
+use App\Http\Livewire\Auth\Login;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,7 @@ Route::get('/', [
     LandingController::class,
     'index'
 ])->name('landing');
+
+Route::middleware('guest')->name('auth.')->group(function () {
+    Route::get('/login', Login::class)->name('login');
+});

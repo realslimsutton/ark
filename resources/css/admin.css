@@ -1,4 +1,28 @@
+@import '../../vendor/filament/forms/dist/module.esm.css';
+
+@import 'tippy.js/dist/tippy.css';
+@import 'tippy.js/themes/light.css';
+
+@multiple-tailwind ../../tailwind.admin.config.js;
+@tailwind base;
+@tailwind components;
 @tailwind utilities;
+
+@layer base {
+    html {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    :root.dark {
+        color-scheme: dark;
+    }
+
+    [dir='rtl'] select {
+        background-position: left 0.5rem center !important;
+        padding-left: 2.5rem;
+        padding-right: 0.75rem;
+    }
+}
 
 ::-moz-selection {
     @apply bg-secondary-dark;
@@ -27,10 +51,8 @@ html::-webkit-scrollbar-thumb {
     @apply bg-secondary-dark;
 }
 
-@media (min-width: 768px) {
-    .md\:flex-row {
-        flex-direction: row;
-    }
+.focus\:ring-offset-primary-700 {
+    @apply ring-offset-0 !important;
 }
 
 .filament-forms-text-input-component input,
@@ -40,13 +62,13 @@ button.bg-white,
 .filament-forms-tags-input-component input,
 .filament-forms-markdown-editor-component textarea,
 .filament-tables-search-input input {
-    @apply bg-primary-dark;
-    @apply border-primary-accent;
-    @apply focus-within:border-secondary-light;
+    @apply bg-primary-dark !important;
+    @apply border-primary-accent !important;
+    @apply focus-within:border-secondary-light !important;
 }
 
 .group-focus-within\:text-primary-500 {
-    @apply group-focus-within:text-secondary-light;
+    @apply group-focus-within:text-secondary-light !important
 }
 
 input[type="number"], select {
@@ -70,17 +92,17 @@ input[type="number"], select {
 }
 
 .choices__list--dropdown .choices__item--selectable.is-highlighted, .choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
-    @apply bg-secondary-light;
+    @apply bg-secondary-light !important;
 }
 
 .is-focused .choices__inner,
 .is-open .choices__inner {
     @apply ring-0 !important;
-    @apply border-secondary-light;
+    @apply border-secondary-light !important;
 }
 
 .focus-within\:ring-1 {
-    @apply focus-within:ring-0;
+    @apply focus-within:ring-0 !important;
 }
 
 .prose {
@@ -90,11 +112,11 @@ input[type="number"], select {
 }
 
 .text-gray-700 {
-    @apply text-neutral-400;
+    @apply text-neutral-400 !important;
 }
 
 .text-gray-800 {
-    @apply text-neutral-500;
+    @apply text-neutral-500 !important;
 }
 
 .focus\:ring, .focus\:ring-2, .focus\:ring-1 {
@@ -102,63 +124,63 @@ input[type="number"], select {
 }
 
 .bg-primary-500\/10 {
-    @apply bg-primary-dark/10;
+    @apply bg-primary-dark/10 !important;
 }
 
 .focus\:bg-primary-500\/10:focus {
-    @apply focus:bg-secondary-light/10;
+    @apply focus:bg-secondary-light/10 !important;
 }
 
 .focus\:ring-offset-2:focus {
-    @apply ring-offset-0;
+    @apply ring-offset-0 !important;
 }
 
 .bg-white {
-    @apply bg-primary-default;
+    @apply bg-primary-default !important;
 }
 
 .bg-primary-50 {
-    @apply bg-primary-dark;
+    @apply bg-primary-dark !important;
 }
 
 .bg-gray-50 {
-    @apply bg-primary-light;
+    @apply bg-primary-light !important;
 }
 
 .bg-primary-500, .bg-primary-600 {
-    @apply bg-secondary-light;
+    @apply bg-secondary-light !important;
 }
 
 .text-primary-500, .text-primary-600 {
-    @apply text-secondary-light;
+    @apply text-secondary-light !important;
 }
 
 .focus\:border-primary-600 {
-    @apply focus:border-secondary-light;
+    @apply focus:border-secondary-light !important;
 }
 
 .hover\:bg-primary-600 {
-    @apply hover:bg-secondary-light;
+    @apply hover:bg-secondary-light !important
 }
 
-.hover\:bg-primary-500 {
-    @apply hover:bg-secondary-dark;
+.hover\:bg-primary-500, .bg-primary-600.hover\:bg-primary-500 {
+    @apply hover:bg-secondary-dark !important;
 }
 
 .hover\:text-primary-500 {
-    @apply hover:text-secondary-dark;
+    @apply hover:text-secondary-dark !important;
 }
 
 .hover\:bg-primary-500.focus\:bg-primary-700 {
-    @apply focus:bg-secondary-light;
+    @apply focus:bg-secondary-light !important;
 }
 
 .focus\:bg-primary-700 {
-    @apply focus:bg-secondary-dark;
+    @apply focus:bg-secondary-dark !important
 }
 
 .hover\:bg-gray-50 {
-    @apply hover:bg-primary-accent;
+    @apply hover:bg-primary-accent !important;
 }
 
 .filament, .filament-body, .filepond--root {
@@ -168,85 +190,85 @@ input[type="number"], select {
 .filepond--drop-label {
     @apply bg-primary-dark !important;
     @apply border-primary-accent !important;
-    @apply text-neutral-400;
+    @apply text-neutral-400 !important;
 }
 
 .filament, .filament-body {
-    @apply bg-primary-dark;
-    @apply text-white;
+    @apply bg-primary-dark !important;
+    @apply text-white !important;
 }
 
 .filament-sidebar-header, .filament-main-topbar {
-    @apply border-primary-accent;
+    @apply border-primary-accent !important;
 }
 
 .filament-sidebar {
-    @apply bg-primary-default;
-    @apply border-primary-accent;
+    @apply bg-primary-default !important;
+    @apply border-primary-accent !important;
 }
 
 .filament-sidebar-item a {
-    @apply hover:bg-primary-accent;
+    @apply hover:bg-primary-accent !important;
 }
 
 .filament-sidebar-item a.bg-primary-500 {
-    @apply hover:bg-secondary-dark;
-    @apply focus:bg-secondary-light;
+    @apply hover:bg-secondary-dark !important;
+    @apply focus:bg-secondary-light !important;
 }
 
 .filament-widget > div {
-    @apply bg-primary-default;
+    @apply bg-primary-default !important;
 }
 
 .filament-tables-pagination-records-per-page-selector > select {
-    @apply bg-primary-dark;
-    @apply text-white;
-    @apply h-10;
+    @apply bg-primary-dark !important;
+    @apply text-white !important;
+    @apply h-10 !important;
 }
 
 .filament-sidebar-open-button {
-    @apply hover:bg-primary-accent/10;
-    @apply focus:bg-secondary-light/10;
+    @apply hover:bg-primary-accent/10 !important;
+    @apply focus:bg-secondary-light/10 !important;
     @apply lg:hidden !important;
 }
 
 .filament-tables-container, .filament-tables-container > .border-t {
-    @apply border-primary-accent;
+    @apply border-primary-accent !important;
 }
 
 .filament-tables-table, .filament-tables-table tbody.divide-y {
-    @apply divide-primary-accent;
+    @apply divide-primary-accent !important;
 }
 
 .filament-tables-header-cell button {
-    @apply text-neutral-400;
-    @apply font-medium;
+    @apply text-neutral-400 !important;
+    @apply font-medium !important;
 }
 
 .filament-page-button-action.bg-white {
-    @apply border-primary-accent;
-    @apply bg-primary-accent;
-    @apply text-white;
-    @apply hover:bg-secondary-light;
-    @apply focus:bg-secondary-dark;
+    @apply border-primary-accent !important;
+    @apply bg-primary-accent !important;
+    @apply text-white !important;
+    @apply hover:bg-secondary-light !important;
+    @apply focus:bg-secondary-dark !important;
 }
 
 .filament-sidebar-nav li > .border-t {
-    @apply border-primary-accent;
+    @apply border-primary-accent !important;
 }
 
 .filament-hr {
-    @apply border-primary-accent;
+    @apply border-primary-accent !important;
 }
 
 .filament-modal-subheading {
-    @apply text-neutral-400;
+    @apply text-neutral-400 !important;
 }
 
 .filament-tables-modal-button-action.bg-white {
-    @apply focus:bg-primary-default;
-    @apply hover:text-white;
-    @apply focus:text-white;
+    @apply focus:bg-primary-default !important;
+    @apply hover:text-white !important;
+    @apply focus:text-white !important;
 }
 
 .filament-notification .bg-white\/50 {
@@ -254,10 +276,14 @@ input[type="number"], select {
 }
 
 .filament-forms-card-component {
-    @apply border-primary-accent;
+    @apply border-primary-accent !important;
 }
 
 .filament-forms-date-time-picker-component .bg-primary-200 {
-    @apply bg-secondary-light;
-    @apply text-white;
+    @apply bg-secondary-light !important;
+    @apply text-white !important;
+}
+
+.filament-tables-row {
+    @apply hover:bg-primary-accent !important;
 }
