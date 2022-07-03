@@ -214,3 +214,7 @@ input[type="number"], select {
 .filament-notification .bg-white\/50 {
     @apply bg-white !important;
 }
+
+.filament-forms-card-component {
+    @apply border-primary-accent;
+}
