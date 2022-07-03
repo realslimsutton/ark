@@ -292,3 +292,7 @@ button.text-primary-700 {
     @apply bg-primary-accent/50 !important;
     @apply text-secondary-light !important;
 }
+
+.filament-tables-pagination-item {
+    @apply ring-secondary-light !important;
+}
