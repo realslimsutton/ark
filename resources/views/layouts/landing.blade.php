@@ -4,6 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" type="image/x-icon">
+        <link rel="icon" href="{{asset('images/favicon.ico')}}" type="image/x-icon">
+        <meta name="theme-color" content="#292E38">
 
         <title>{{config('app.name')}}</title>
 
