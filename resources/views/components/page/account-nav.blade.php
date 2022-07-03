@@ -3,9 +3,8 @@
         Hello, {{auth()->user()->name}}
     </div>
 
-    <form action="{{route('logout')}}" method="POST">
+    <form action="{{route('filament.auth.logout')}}" method="POST">
         @csrf
-        @method('DELETE')
 
         <button type="submit" class="text-white font-semibold">
             Logout

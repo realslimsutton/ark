@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\LandingController;
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,20 +18,3 @@ Route::get('/', [
     LandingController::class,
     'index'
 ])->name('landing');
-
-Route::middleware('guest')->group(function () {
-    Route::get('/login', [
-        LoginController::class,
-        'show'
-    ])->name('login');
-
-    Route::post('/login', [
-        LoginController::class,
-        'authenticate'
-    ]);
-});
-
-Route::delete('/logout', [
-    LoginController::class,
-    'logout'
-])->middleware('auth')->name('logout');

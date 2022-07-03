@@ -5,6 +5,7 @@ module.exports = {
     content: [
         './resources/views/**/*.blade.php'
     ],
+    darkMode: 'class',
     theme: {
         extend: {
             fontFamily: {
@@ -15,7 +16,7 @@ module.exports = {
                     light: '#211F2A',
                     default: '#292E38',
                     dark: '#181C23',
-                    accent: '#2f3541'
+                    accent: '#2F3541'
                 },
                 secondary: {
                     light: '#DF204D',
@@ -29,6 +30,7 @@ module.exports = {
         }
     },
     plugins: [
-        require('@tailwindcss/forms')
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/typography')
     ]
 };

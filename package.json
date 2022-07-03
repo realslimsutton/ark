@@ -7,6 +7,7 @@
     "devDependencies": {
         "@glidejs/glide": "^3.5.2",
         "@tailwindcss/forms": "^0.5.2",
+        "@tailwindcss/typography": "^0.5.2",
         "alpinejs": "^3.10.2",
         "autoprefixer": "^10.4.7",
         "axios": "^0.25",
@@ -14,6 +15,7 @@
         "lodash": "^4.17.19",
         "postcss": "^8.4.14",
         "tailwindcss": "^3.1.4",
+        "tippy.js": "^6.3.7",
         "vite": "^2.9.11"
     },
     "dependencies": {
