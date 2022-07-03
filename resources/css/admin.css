@@ -81,4 +81,5 @@
 .filament-sidebar-open-button {
     @apply hover:bg-primary-accent/10;
     @apply focus:bg-secondary-light/10;
+    @apply lg:hidden !important;
 }
