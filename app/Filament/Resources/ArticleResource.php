@@ -55,7 +55,17 @@ class ArticleResource extends Resource
                         Forms\Components\DateTimePicker::make('published_at')
                             ->label('Published at')
                             ->nullable()
-                            ->withoutSeconds(),
+                            ->withoutSeconds()
+                            ->dehydrateStateUsing(function ($state) {
+                                $now = now();
+
+                                $parsedState = Carbon::parse($state);
+                                if ($parsedState->isBefore($now)) {
+                                    return $now;
+                                }
+
+                                return $parsedState;
+                            }),
                         Forms\Components\SpatieTagsInput::make('tags')
                     ])
                     ->columns([
