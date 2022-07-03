@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->text('summary');
-            $table->text('content');
-            $table->foreignId('user_id')->index()->constrained();
+            $table->longText('content');
+            $table->foreignId('user_id')->index()->constrained()->cascadeOnDelete();
+            $table->foreignId('category_id')->nullable()->index()->constrained()->nullOnDelete();
+            $table->dateTime('published_at')->nullable();
             $table->timestamps();
         });
     }
