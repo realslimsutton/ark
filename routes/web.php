@@ -26,6 +26,6 @@ Route::get('/test/{id}', [
     'show'
 ])->name('test');
 
-Route::middleware('guest')->name('auth.')->group(function () {
+Route::middleware('guest')->group(function () {
     Route::get('/login', Login::class)->name('login');
 });

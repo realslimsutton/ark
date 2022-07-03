@@ -27,7 +27,10 @@ class TestController extends Controller
     private function getFieldIds(Product $product): array
     {
         return $product->fields->mapWithKeys(fn($value, $key) => [
-            $value->id => $value->additional_price
+            $value->id => $value->options
+                ->filter(fn($option) => in_array($option->id, $value->pivot->config))
+                ->first()
+                ?->additional_price
         ])->all();
     }
 }

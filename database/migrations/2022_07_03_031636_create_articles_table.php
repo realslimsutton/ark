@@ -20,9 +20,11 @@ return new class extends Migration
             $table->text('summary');
             $table->longText('content');
             $table->foreignId('user_id')->index()->constrained()->cascadeOnDelete();
-            $table->foreignId('category_id')->nullable()->index()->constrained()->nullOnDelete();
-            $table->dateTime('published_at')->nullable();
+            $table->unsignedBigInteger('category_id')->index();
+            $table->timestamp('published_at')->nullable()->index();
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('article_categories');
         });
     }
 

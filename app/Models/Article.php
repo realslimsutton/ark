@@ -19,7 +19,7 @@ class Article extends Model implements HasMedia
         'summary',
         'content',
         'user_id',
-        'article_category_id',
+        'category_id',
         'published_at'
     ];
 
@@ -34,6 +34,6 @@ class Article extends Model implements HasMedia
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(ArticleCategory::class);
+        return $this->belongsTo(ArticleCategory::class, 'category_id');
     }
 }

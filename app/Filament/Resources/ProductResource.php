@@ -12,6 +12,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 class ProductResource extends Resource
@@ -43,7 +44,40 @@ class ProductResource extends Resource
                         Forms\Components\TextInput::make('price')
                             ->numeric()
                             ->required()
-                            ->minValue(0)
+                            ->minValue(0),
+                        Forms\Components\Select::make('category_id')
+                            ->relationship('category', 'title')
+                            ->searchable()
+                            ->required(),
+                        Forms\Components\SpatieTagsInput::make('tags'),
+                        Forms\Components\DateTimePicker::make('published_at')
+                            ->label('Published at')
+                            ->nullable()
+                            ->withoutSeconds()
+                            ->dehydrateStateUsing(function ($state) {
+                                $now = now();
+
+                                $parsedState = Carbon::parse($state);
+                                if ($parsedState->isBefore($now)) {
+                                    return $now;
+                                }
+
+                                return $parsedState;
+                            }),
+                        Forms\Components\DateTimePicker::make('expires_at')
+                            ->label('Expires at')
+                            ->nullable()
+                            ->withoutSeconds()
+                            ->dehydrateStateUsing(function ($state) {
+                                $now = now();
+
+                                $parsedState = Carbon::parse($state);
+                                if ($parsedState->isBefore($now)) {
+                                    return $now;
+                                }
+
+                                return $parsedState;
+                            })
                     ])
                     ->columns([
                         'sm' => 2
@@ -56,8 +90,6 @@ class ProductResource extends Resource
                     ->schema([
                         Forms\Components\SpatieMediaLibraryFileUpload::make('thumbnail')
                             ->collection('thumbnail'),
-                        Forms\Components\Toggle::make('is_published')
-                            ->label('Publish'),
                         Forms\Components\Placeholder::make('created_at')
                             ->label('Created at')
                             ->content(fn(?Product $record): string => $record?->created_at?->diffForHumans() ?? '-'),
@@ -77,11 +109,25 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('slug'),
-                Tables\Columns\TextColumn::make('price'),
-                Tables\Columns\BooleanColumn::make('is_published')
-                    ->label('Published')
+                Tables\Columns\TextColumn::make('name')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('slug')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('price')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('published_at')
+                    ->label('Published at')
+                    ->dateTime()
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('expires_at')
+                    ->label('Expires at')
+                    ->dateTime()
+                    ->sortable()
+                    ->searchable()
             ])
             ->filters([
                 //

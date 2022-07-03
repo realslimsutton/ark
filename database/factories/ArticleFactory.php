@@ -25,7 +25,8 @@ class ArticleFactory extends Factory
             'slug' => Str::slug($title),
             'summary' => fake()->paragraph,
             'content' => $content,
-            'user_id' => 1
+            'user_id' => 1,
+            'category_id' => rand(1, 10)
         ];
     }
 }

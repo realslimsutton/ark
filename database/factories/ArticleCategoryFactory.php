@@ -3,11 +3,12 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ArticleCategory>
  */
-class CategoryFactory extends Factory
+class ArticleCategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,8 +17,12 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
+        $title = fake()->sentence();
+
         return [
-            //
+            'title' => $title,
+            'slug' => Str::slug($title),
+            'description' => null
         ];
     }
 }

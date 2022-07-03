@@ -3,10 +3,13 @@
 @section('content')
     <div class="text-white font-medium">
         <x-layout.container>
-            <div x-data="{
-                price: {{$product->price}},
-                selectedOptions: {{json_encode($fieldIds)}}
-            }">
+            <div
+                x-data="{
+                    price: {{$product->price}},
+                    selectedOptions: {{json_encode($fieldIds)}}
+                }
+            "
+                x-init="sum({{$product->price}}, selectedOptions)">
                 <div>
                     Name: {{$product->name}}
                 </div>
