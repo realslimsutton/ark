@@ -5,27 +5,27 @@
 
     <ul class="text-center text-white font-semibold">
         <li>
-            <span class="text-secondary-dark">Experience (ALL):</span> {{config('ark.server.rates.experience')}}
+            <span class="text-secondary-light">Experience (ALL):</span> {{config('ark.server.rates.experience')}}
         </li>
 
         <li>
-            <span class="text-secondary-dark">Harvest:</span> {{config('ark.server.rates.harvest')}}
+            <span class="text-secondary-light">Harvest:</span> {{config('ark.server.rates.harvest')}}
         </li>
 
         <li>
-            <span class="text-secondary-dark">Taming:</span> {{config('ark.server.rates.taming')}}
+            <span class="text-secondary-light">Taming:</span> {{config('ark.server.rates.taming')}}
         </li>
 
         <li>
-            <span class="text-secondary-dark">Maturation:</span> {{config('ark.server.rates.maturation')}}
+            <span class="text-secondary-light">Maturation:</span> {{config('ark.server.rates.maturation')}}
         </li>
 
         <li>
-            <span class="text-secondary-dark">Incubation:</span> {{config('ark.server.rates.incubation')}}
+            <span class="text-secondary-light">Incubation:</span> {{config('ark.server.rates.incubation')}}
         </li>
 
         <li>
-            <span class="text-secondary-dark">Imprint:</span> {{config('ark.server.rates.imprint')}}
+            <span class="text-secondary-light">Imprint:</span> {{config('ark.server.rates.imprint')}}
         </li>
     </ul>
 </x-landing.sidebar.box>

@@ -1,7 +1,15 @@
 @tailwind utilities;
 
-.focus\:ring-2, .focus\:ring-1 {
+.focus\:ring, .focus\:ring-2, .focus\:ring-1 {
     @apply ring-0 !important;
+}
+
+.bg-primary-500\/10 {
+    @apply bg-primary-dark/10;
+}
+
+.focus\:bg-primary-500\/10:focus {
+    @apply focus:bg-secondary-light/10;
 }
 
 .focus\:ring-offset-2:focus {
@@ -14,6 +22,10 @@
 
 .bg-primary-50 {
     @apply bg-primary-dark;
+}
+
+.bg-gray-50 {
+    @apply bg-primary-light;
 }
 
 .bg-primary-500, .bg-primary-600 {
@@ -36,12 +48,20 @@
     @apply hover:bg-secondary-dark;
 }
 
+.hover\:text-primary-500 {
+    @apply hover:text-secondary-dark;
+}
+
 .hover\:bg-primary-500.focus\:bg-primary-700 {
     @apply focus:bg-secondary-light;
 }
 
 .focus\:bg-primary-700 {
     @apply focus:bg-secondary-dark;
+}
+
+.hover\:bg-gray-50 {
+    @apply hover:bg-primary-accent;
 }
 
 .filament, .filament-body {
@@ -82,4 +102,17 @@
     @apply hover:bg-primary-accent/10;
     @apply focus:bg-secondary-light/10;
     @apply lg:hidden !important;
+}
+
+.filament-tables-container, .filament-tables-container > .border-t {
+    @apply border-primary-accent;
+}
+
+.filament-tables-table, .filament-tables-table tbody.divide-y {
+    @apply divide-primary-accent;
+}
+
+.filament-tables-header-cell button {
+    @apply text-neutral-400;
+    @apply font-medium;
 }
