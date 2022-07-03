@@ -42,7 +42,7 @@ class User extends Authenticatable implements FilamentUser
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'is_admin' => 'bool'
+        'is_admin' => 'boolean'
     ];
 
     public function canAccessFilament(): bool
