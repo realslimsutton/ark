@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+::-moz-selection {
+    @apply bg-secondary-dark;
+    @apply text-white;
+}
+
+::selection {
+    @apply bg-secondary-dark;
+    @apply text-white;
+}
+
+html::-webkit-scrollbar {
+    width: 8px;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.secondary.dark') theme('colors.primary.dark');
+}
+
+html::-webkit-scrollbar-track {
+    @apply bg-primary-dark;
+}
+
+html::-webkit-scrollbar-thumb {
+    @apply bg-secondary-dark;
+}
+
 #top-page-bg {
     @apply absolute;
     @apply inset-0;

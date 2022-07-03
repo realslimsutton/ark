@@ -1,14 +1,46 @@
 @tailwind utilities;
 
+::-moz-selection {
+    @apply bg-secondary-dark;
+    @apply text-white;
+}
+
+::selection {
+    @apply bg-secondary-dark;
+    @apply text-white;
+}
+
+html::-webkit-scrollbar {
+    width: 8px;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.secondary.dark') theme('colors.primary.dark');
+}
+
+html::-webkit-scrollbar-track {
+    @apply bg-primary-dark;
+}
+
+html::-webkit-scrollbar-thumb {
+    @apply bg-secondary-dark;
+}
+
 .filament-forms-text-input-component input,
 button.bg-white,
 .choices__inner,
 .filament-forms-tags-input-component > div,
 .filament-forms-tags-input-component input,
-.filament-forms-markdown-editor-component textarea {
+.filament-forms-markdown-editor-component textarea,
+.filament-tables-search-input input {
     @apply bg-primary-dark;
     @apply border-primary-accent;
     @apply focus-within:border-secondary-light;
+}
+
+.group-focus-within\:text-primary-500 {
+    @apply group-focus-within:text-secondary-light;
 }
 
 input[type="number"], select {

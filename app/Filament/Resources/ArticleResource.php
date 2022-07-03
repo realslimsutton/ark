@@ -81,9 +81,20 @@ class ArticleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
-
+                Tables\Columns\TextColumn::make('title')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->sortable()
+                    ->searchable()
+                    ->date(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->sortable()
+                    ->searchable()
+                    ->date()
             ])
             ->filters([
                 //
