@@ -1,35 +1,30 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\UserResource\RelationManagers;
 
-use App\Filament\Resources\ArticleResource\Pages;
-use App\Filament\Resources\ArticleResource\RelationManagers;
 use App\Models\Article;
 use Filament\Forms;
 use Filament\Resources\Form;
-use Filament\Resources\Resource;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\Column;
-use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
-class ArticleResource extends Resource
+class ArticlesRelationManager extends RelationManager
 {
-    protected static ?string $model = Article::class;
+    protected static string $relationship = 'articles';
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
-
-    protected static ?string $navigationGroup = 'News';
+    protected static ?string $recordTitleAttribute = 'title';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Card::make()
+                Forms\Components\Grid::make()
                     ->schema([
                         Forms\Components\TextInput::make('title')
                             ->required()
@@ -54,33 +49,15 @@ class ArticleResource extends Resource
                             ->required(),
                         Forms\Components\DateTimePicker::make('published_at')
                             ->label('Published at'),
-                        Forms\Components\SpatieTagsInput::make('tags')
+                        Forms\Components\SpatieTagsInput::make('tags'),
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('thumbnail')
+                            ->columnSpan([
+                                'sm' => 2
+                            ]),
                     ])
                     ->columns([
                         'sm' => 2
                     ])
-                    ->columnSpan([
-                        'sm' => 2
-                    ]),
-
-                Forms\Components\Card::make()
-                    ->schema([
-                        Forms\Components\SpatieMediaLibraryFileUpload::make('thumbnail'),
-                        Forms\Components\Placeholder::make('published_at')
-                            ->label('Published at')
-                            ->content(fn(?Article $record): string => $record?->published_at?->diffForHumans() ?? '-'),
-                        Forms\Components\Placeholder::make('created_at')
-                            ->label('Created at')
-                            ->content(fn(?Article $record): string => $record?->created_at?->diffForHumans() ?? '-'),
-                        Forms\Components\Placeholder::make('updated_at')
-                            ->label('Last updated at')
-                            ->content(fn(?Article $record): string => $record?->updated_at?->diffForHumans() ?? '-')
-                    ])
-                    ->columnSpan(1)
-            ])
-            ->columns([
-                'sm' => 3,
-                'lg' => null
             ]);
     }
 
@@ -128,21 +105,5 @@ class ArticleResource extends Resource
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListArticles::route('/'),
-            'create' => Pages\CreateArticle::route('/create'),
-            'edit' => Pages\EditArticle::route('/{record}/edit'),
-        ];
     }
 }

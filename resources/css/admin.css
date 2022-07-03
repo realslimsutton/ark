@@ -27,6 +27,12 @@ html::-webkit-scrollbar-thumb {
     @apply bg-secondary-dark;
 }
 
+@media (min-width: 768px) {
+    .md\:flex-row {
+        flex-direction: row;
+    }
+}
+
 .filament-forms-text-input-component input,
 button.bg-white,
 .choices__inner,
@@ -249,4 +255,9 @@ input[type="number"], select {
 
 .filament-forms-card-component {
     @apply border-primary-accent;
+}
+
+.filament-forms-date-time-picker-component .bg-primary-200 {
+    @apply bg-secondary-light;
+    @apply text-white;
 }

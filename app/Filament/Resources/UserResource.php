@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
-use App\Models\Category;
+use App\Filament\Resources\UserResource\Pages;
+use App\Filament\Resources\UserResource\RelationManagers;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -12,15 +12,14 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Str;
 
-class CategoryResource extends Resource
+class UserResource extends Resource
 {
-    protected static ?string $model = Category::class;
+    protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = 'News';
+    protected static ?string $navigationGroup = 'Users';
 
     public static function form(Form $form): Form
     {
@@ -28,17 +27,13 @@ class CategoryResource extends Resource
             ->schema([
                 Forms\Components\Card::make()
                     ->schema([
-                        Forms\Components\TextInput::make('title')
+                        Forms\Components\TextInput::make('name')
+                            ->required(),
+                        Forms\Components\TextInput::make('email')
+                            ->label('Email address')
                             ->required()
-                            ->reactive()
-                            ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
-                        Forms\Components\TextInput::make('slug')
-                            ->required()
-                            ->unique(Category::class, 'slug', fn($record) => $record),
-                        Forms\Components\MarkdownEditor::make('description')
-                            ->columnSpan([
-                                'sm' => 2
-                            ])
+                            ->email()
+                            ->unique(User::class, 'email', fn($record) => $record),
                     ])
                     ->columns([
                         'sm' => 2
@@ -49,12 +44,13 @@ class CategoryResource extends Resource
 
                 Forms\Components\Card::make()
                     ->schema([
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('thumbnail'),
                         Forms\Components\Placeholder::make('created_at')
                             ->label('Created at')
-                            ->content(fn(?Category $record): string => $record?->created_at?->diffForHumans() ?? '-'),
+                            ->content(fn(?User $record): string => $record?->created_at?->diffForHumans() ?? '-'),
                         Forms\Components\Placeholder::make('updated_at')
                             ->label('Last updated at')
-                            ->content(fn(?Category $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
+                            ->content(fn(?User $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
                     ])
                     ->columnSpan(1)
             ])
@@ -68,10 +64,11 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
+                Tables\Columns\TextColumn::make('name')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
+                Tables\Columns\TextColumn::make('email')
+                    ->label('Email address')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -80,7 +77,7 @@ class CategoryResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Updated at')
+                    ->label('Last updated at')
                     ->date()
                     ->sortable()
                     ->searchable()
@@ -106,9 +103,9 @@ class CategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCategories::route('/'),
-            'create' => Pages\CreateCategory::route('/create'),
-            'edit' => Pages\EditCategory::route('/{record}/edit'),
+            'index' => Pages\ListUsers::route('/'),
+            'create' => Pages\CreateUser::route('/create'),
+            'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 }
