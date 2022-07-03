@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
-use App\Models\ArticleCategory;
+use App\Filament\Resources\ProductResource\Pages;
+use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Models\Product;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -14,13 +14,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 
-class CategoryResource extends Resource
+class ProductResource extends Resource
 {
-    protected static ?string $model = ArticleCategory::class;
+    protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = 'News';
+    protected static ?string $navigationGroup = 'Store';
 
     public static function form(Form $form): Form
     {
@@ -28,17 +28,22 @@ class CategoryResource extends Resource
             ->schema([
                 Forms\Components\Card::make()
                     ->schema([
-                        Forms\Components\TextInput::make('title')
+                        Forms\Components\TextInput::make('name')
                             ->required()
                             ->reactive()
                             ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
                         Forms\Components\TextInput::make('slug')
                             ->required()
-                            ->unique(ArticleCategory::class, 'slug', fn($record) => $record),
+                            ->unique(Product::class, 'slug', fn($record) => $record),
                         Forms\Components\MarkdownEditor::make('description')
+                            ->required()
                             ->columnSpan([
                                 'sm' => 2
-                            ])
+                            ]),
+                        Forms\Components\TextInput::make('price')
+                            ->numeric()
+                            ->required()
+                            ->minValue(0)
                     ])
                     ->columns([
                         'sm' => 2
@@ -49,12 +54,16 @@ class CategoryResource extends Resource
 
                 Forms\Components\Card::make()
                     ->schema([
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('thumbnail')
+                            ->collection('thumbnail'),
+                        Forms\Components\Toggle::make('is_published')
+                            ->label('Publish'),
                         Forms\Components\Placeholder::make('created_at')
                             ->label('Created at')
-                            ->content(fn(?ArticleCategory $record): string => $record?->created_at?->diffForHumans() ?? '-'),
+                            ->content(fn(?Product $record): string => $record?->created_at?->diffForHumans() ?? '-'),
                         Forms\Components\Placeholder::make('updated_at')
                             ->label('Last updated at')
-                            ->content(fn(?ArticleCategory $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
+                            ->content(fn(?Product $record): string => $record?->updated_at?->diffForHumans() ?? '-')
                     ])
                     ->columnSpan(1)
             ])
@@ -68,22 +77,11 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Created at')
-                    ->date()
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Updated at')
-                    ->date()
-                    ->sortable()
-                    ->searchable()
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\BooleanColumn::make('is_published')
+                    ->label('Published')
             ])
             ->filters([
                 //
@@ -99,16 +97,16 @@ class CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\ArticlesRelationManager::class
+            RelationManagers\FieldsRelationManager::class
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCategories::route('/'),
-            'create' => Pages\CreateCategory::route('/create'),
-            'edit' => Pages\EditCategory::route('/{record}/edit'),
+            'index' => Pages\ListProducts::route('/'),
+            'create' => Pages\CreateProduct::route('/create'),
+            'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }
 }

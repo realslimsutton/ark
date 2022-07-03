@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\TestController;
 use App\Http\Livewire\Auth\Login;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,11 @@ Route::get('/', [
     LandingController::class,
     'index'
 ])->name('landing');
+
+Route::get('/test/{id}', [
+    TestController::class,
+    'show'
+])->name('test');
 
 Route::middleware('guest')->name('auth.')->group(function () {
     Route::get('/login', Login::class)->name('login');
