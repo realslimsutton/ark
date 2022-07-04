@@ -56,20 +56,23 @@ class StatsOverviewWidget extends BaseWidget
         $current = $values->last();
         $difference = $current - $previous;
 
+        $increase = $difference > 0;
+        $difference = abs($difference);
+
         return Card::make('New users', number_format($current))
             ->description(
-                $difference > 0
+                $increase
                     ? $difference . ' increase'
                     : $difference . ' decrease'
             )
             ->descriptionIcon(
-                $difference > 0
+                $increase
                     ? 'heroicon-s-trending-up'
                     : 'heroicon-s-trending-down'
             )
             ->chart($values->all())
             ->color(
-                $difference > 0
+                $increase
                     ? 'success'
                     : 'danger'
             );
