@@ -19,7 +19,13 @@ class AuditsRelationManager extends RelationManager
 
     public static function table(Table $table): Table
     {
-        return AuditResource::table($table);
+        return AuditResource::table($table)
+            ->bulkActions([])
+            ->actions([
+                Tables\Actions\Action::make('View')
+                    ->link()
+                    ->url(fn($record) => AuditResource::getUrl('view', ['record' => $record]), shouldOpenInNewTab: true),
+            ]);
     }
 
     protected function canCreate(): bool
