@@ -6,6 +6,7 @@ use AlexJustesen\FilamentSpatieLaravelActivitylog\Contracts\IsActivitySubject;
 use AlexJustesen\FilamentSpatieLaravelActivitylog\RelationManagers\ActivitiesRelationManager;
 use AlexJustesen\FilamentSpatieLaravelActivitylog\ResourceFinder;
 use App\Filament\Resources\AuditResource\Pages;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -30,25 +31,57 @@ class AuditResource extends Resource
 
     protected static ?string $navigationGroup = 'Management';
 
+//    public static function form(Form $form): Form
+//    {
+//        return $form
+//            ->schema([
+//                Forms\Components\TextInput::make('causer_type')
+//                    ->label('Causer type'),
+//                Forms\Components\TextInput::make('causer_id')
+//                    ->label('Causer id'),
+//                Forms\Components\TextInput::make('subject_type')
+//                    ->label('Subject type'),
+//                Forms\Components\TextInput::make('subject_id')
+//                    ->label('Subject id'),
+//                Forms\Components\TextInput::make('description')
+//                    ->label('Description'),
+//                Forms\Components\KeyValue::make('properties.attributes')
+//                    ->label('New data'),
+//                Forms\Components\KeyValue::make('properties.old')
+//                    ->label('Old data')
+//            ]);
+//    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('causer_type')
-                    ->label('Causer type'),
-                Forms\Components\TextInput::make('causer_id')
-                    ->label('Causer id'),
-                Forms\Components\TextInput::make('subject_type')
-                    ->label('Subject type'),
-                Forms\Components\TextInput::make('subject_id')
-                    ->label('Subject id'),
-                Forms\Components\TextInput::make('description')
-                    ->label('Description')
-                    ->columnSpan(2),
-                Forms\Components\KeyValue::make('properties.attributes')
-                    ->label('New data'),
-                Forms\Components\KeyValue::make('properties.old')
-                    ->label('Old data'),
+                Forms\Components\Grid::make()
+                    ->schema([
+                        Forms\Components\TextInput::make('causer_type')
+                            ->label('Causer type'),
+                        Forms\Components\TextInput::make('causer_id')
+                            ->label('Causer id'),
+                        Forms\Components\TextInput::make('subject_type')
+                            ->label('Subject type'),
+                        Forms\Components\TextInput::make('subject_id')
+                            ->label('Subject id'),
+                        Forms\Components\TextInput::make('description')
+                            ->label('Description')
+                            ->columnSpan([
+                                'sm' => 2
+                            ]),
+                        Forms\Components\KeyValue::make('properties.attributes')
+                            ->label('New data'),
+                        Forms\Components\KeyValue::make('properties.old')
+                            ->label('Old data')
+                    ])
+                    ->columns([
+                        'sm' => 2
+                    ])
+                    ->columnSpan([
+                        'sm' => 2
+                    ])
             ]);
     }
 
