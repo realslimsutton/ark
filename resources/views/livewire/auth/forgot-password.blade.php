@@ -17,6 +17,10 @@
                     </h1>
                 </div>
 
+                <p class="text-neutral-400">
+                    An email will be sent to your email address enabling you to recover your account.
+                </p>
+
                 {{$this->form}}
 
                 <x-filament::button type="submit" class="w-full">
