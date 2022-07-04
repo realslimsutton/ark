@@ -4,6 +4,7 @@ use App\Filament\Widgets\StatsOverviewWidget;
 use App\Filament\Widgets\TotalDonationsWidget;
 use App\Filament\Widgets\ApplicationStatisticsWidget;
 use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\EnsureEmailIsVerified;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Http\Middleware\MirrorConfigToSubpackages;
 use Filament\Pages;
@@ -285,6 +286,7 @@ return [
             SubstituteBindings::class,
             DispatchServingFilamentEvent::class,
             MirrorConfigToSubpackages::class,
+            EnsureEmailIsVerified::class
         ],
     ],
 

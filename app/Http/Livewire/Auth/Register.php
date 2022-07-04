@@ -11,7 +11,6 @@ use Filament\Forms\Contracts\HasForms;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\Rules;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
-use Laravel\Socialite\Facades\Socialite;
 use Livewire\Component;
 use Phpsa\FilamentPasswordReveal\Password;
 

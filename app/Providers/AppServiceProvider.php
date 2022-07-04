@@ -2,10 +2,16 @@
 
 namespace App\Providers;
 
+use App\Http\Livewire\Auth\ForgotPassword;
+use App\Http\Livewire\Auth\Login;
+use App\Http\Livewire\Auth\Register;
+use App\Http\Livewire\Auth\ResetPassword;
+use App\Http\Livewire\Auth\VerifyEmail;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Vite;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Fortify\Fortify;
 use Spatie\CpuLoadHealthCheck\CpuLoadCheck;
 use Spatie\Health\Checks\Checks\CacheCheck;
 use Spatie\Health\Checks\Checks\DatabaseCheck;
@@ -20,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->setupHealthChecks();
+
+        $this->setupFortify();
 
         Filament::serving(function () {
             Filament::registerNavigationGroups([
@@ -61,5 +69,28 @@ class AppServiceProvider extends ServiceProvider
         }
 
         Health::checks($checks);
+    }
+
+    private function setupFortify(): void
+    {
+        Fortify::loginView(function () {
+            return app()->call(Login::class);
+        });
+
+        Fortify::registerView(function () {
+            return app()->call(Register::class);
+        });
+
+        Fortify::requestPasswordResetLinkView(function () {
+            return app()->call(ForgotPassword::class);
+        });
+
+        Fortify::resetPasswordView(function () {
+            return app()->call(ResetPassword::class);
+        });
+
+        Fortify::verifyEmailView(function() {
+            return app()->call(VerifyEmail::class);
+        });
     }
 }

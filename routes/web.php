@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\DiscordController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\TestController;
+use App\Http\Livewire\Auth\ForgotPassword;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
 use Illuminate\Support\Facades\Route;
@@ -30,9 +31,6 @@ Route::get('/test/{id}', [
 ])->name('test');
 
 Route::middleware('guest')->group(function () {
-    Route::get('/login', Login::class)->name('login');
-    Route::get('/register', Register::class)->name('register');
-
     Route::get('/discord/redirect', [
         DiscordController::class,
         'redirect'
