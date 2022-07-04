@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Jobs\CleanBackupsJob;
 use App\Jobs\CreateBackupJob;
 use Filament\Pages\Actions\Action;
 use Filament\Pages\Page;
@@ -33,6 +34,13 @@ class Backups extends Page
             Action::make('Create Backup')
                 ->label(__('filament-spatie-backup::backup.pages.backups.actions.create_backup'))
                 ->action('openOptionModal'),
+
+            Action::make('Clean Backups')
+                ->requiresConfirmation()
+                ->modalHeading('Clean Backups')
+                ->modalSubheading('Are you sure you want to clean the old backups?')
+                ->action('clean')
+                ->color('secondary')
         ];
     }
 
@@ -50,5 +58,14 @@ class Backups extends Page
         $this->dispatchBrowserEvent('close-modal', ['id' => 'backup-option']);
 
         $this->notify('success', 'Backup is being created');
+    }
+
+    public function clean(): void
+    {
+        dispatch(new CleanBackupsJob())
+            ->onQueue(config('filament-spatie-laravel-backup.queue'))
+            ->afterResponse();
+
+        $this->notify('success', 'Old backups are being cleaned');
     }
 }

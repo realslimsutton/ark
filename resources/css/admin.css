@@ -312,3 +312,7 @@ button.focus\:text-primary-600 {
 .filament-tables-button-action.bg-white {
     @apply text-white !important;
 }
+
+.filament-page-button-action.bg-white {
+    @apply focus:text-white !important;
+}
