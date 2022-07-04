@@ -25,7 +25,8 @@ class AuditsRelationManager extends RelationManager
                 Tables\Actions\Action::make('View')
                     ->link()
                     ->url(fn($record) => AuditResource::getUrl('view', ['record' => $record]), shouldOpenInNewTab: true),
-            ]);
+            ])
+            ->defaultSort('created_at', 'DESC');
     }
 
     protected function canCreate(): bool
