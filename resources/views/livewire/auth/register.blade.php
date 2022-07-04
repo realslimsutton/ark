@@ -1,6 +1,6 @@
 <div class="min-h-screen w-full bg-primary-dark flex items-center justify-center">
     <div class="max-w-md w-full px-4 py-8">
-        <form wire:submit.prevent="authenticate" class="space-y-24">
+        <form wire:submit.prevent="authenticate" class="space-y-16 md:space-y-24">
             <div class="flex items-center justify-center">
                 <a
                     href="{{route('landing')}}"
