@@ -2,12 +2,12 @@
 
 namespace App\Support;
 
-use Filament\AvatarProviders\Contracts\AvatarProvider;
+use Filament\AvatarProviders\Contracts\AvatarProvider as AvatarProviderAlias;
 use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class UiAvatarProvider implements AvatarProvider
+class UiAvatarProvider implements AvatarProviderAlias
 {
     public function get(Model $user): string
     {
