@@ -8,7 +8,9 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\Rules;
+use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Socialite\Facades\Socialite;
 use Livewire\Component;
 use Phpsa\FilamentPasswordReveal\Password;
@@ -27,7 +29,7 @@ class Register extends Component implements HasForms
         $this->form->fill();
     }
 
-    public function register()
+    public function register(CreatesNewUsers $creator)
     {
         try {
             $this->rateLimit(5);
@@ -42,7 +44,11 @@ class Register extends Component implements HasForms
 
         $data = $this->form->getState();
 
-        dd($data);
+        event(new Registered($user = $creator->create($data)));
+
+        auth()->login($user);
+
+        return redirect()->route('landing');
     }
 
     public function render()
