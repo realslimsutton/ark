@@ -5,16 +5,62 @@
     x-collapse
 >
     <ul class="w-full block lg:hidden">
-        <x-page.mobile-nav-item to="#" label="HOME" :active="true"/>
+        <x-page.mobile-nav-item
+            to="{{route('landing')}}"
+            label="HOME"
+            :active="request()->route()->getName() === 'landing'"
+        />
 
-        <x-page.mobile-nav-item to="#" label="COMMUNITY" :active="false"/>
+        <x-page.mobile-nav-item
+            to="#"
+            label="STORE"
+            :active="str_starts_with(request()->route()->getName(), 'store')"
+        />
 
-        <x-page.mobile-nav-item to="#" label="NEWS" :active="false"/>
+        <x-page.mobile-nav-item
+            to="#"
+            label="NEWS"
+            :active="str_starts_with(request()->route()->getName(), 'news')"
+        />
 
-        <x-page.mobile-nav-item to="#" label="SUPPORT" :active="false"/>
+        <x-page.mobile-nav-item
+            to="#"
+            label="TRADING"
+            :active="str_starts_with(request()->route()->getName(), 'trading')"
+        />
 
-        <x-page.mobile-nav-item to="#" label="LOGIN" :active="false"/>
+        <x-page.mobile-nav-item
+            to="#"
+            label="SUPPORT"
+            :active="str_starts_with(request()->route()->getName(), 'support')"
+        />
 
-        <x-page.mobile-nav-item to="#" label="CREATE ACCOUNT" :active="false"/>
+        <x-page.mobile-nav-item
+            to="#"
+            label="SUPPORT"
+            :active="str_starts_with(request()->route()->getName(), 'support')"
+        />
+
+        @guest()
+            <x-page.mobile-nav-item
+                to="{{route('login')}}"
+                label="LOGIN"
+                :active="false"
+            />
+
+            <x-page.mobile-nav-item
+                to="{{route('register')}}"
+                label="CREATE ACCOUNT"
+                :active="false"
+            />
+        @else
+            @if(auth()->user()->hasPermissionTo('view admin'))
+                <x-page.mobile-nav-item
+                    to="{{route('filament.pages.dashboard')}}"
+                    label="Administration"
+                    :active="false"
+                />
+            @endif
+        @endguest
     </ul>
 </div>

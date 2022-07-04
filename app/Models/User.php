@@ -7,6 +7,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\LogOptions;
@@ -21,11 +22,15 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Has
 {
     use HasFactory, Notifiable, HasRoles, InteractsWithMedia, LogsActivity, CausesActivity;
 
+    protected $with = [
+        'discord'
+    ];
+
     protected $fillable = [
         'name',
         'email',
         'password',
-        'is_admin'
+        'email_verified_at'
     ];
 
     protected $hidden = [
@@ -34,13 +39,17 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Has
     ];
 
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'is_admin' => 'boolean'
+        'email_verified_at' => 'datetime'
     ];
 
     public function articles(): HasMany
     {
         return $this->hasMany(Article::class);
+    }
+
+    public function discord(): HasOne
+    {
+        return $this->hasOne(DiscordUser::class);
     }
 
     public function canAccessFilament(): bool

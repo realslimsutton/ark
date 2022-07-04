@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Auth\DiscordController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\TestController;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +32,14 @@ Route::get('/test/{id}', [
 Route::middleware('guest')->group(function () {
     Route::get('/login', Login::class)->name('login');
     Route::get('/register', Register::class)->name('register');
+
+    Route::get('/discord/redirect', [
+        DiscordController::class,
+        'redirect'
+    ])->name('discord.redirect');
+
+    Route::get('/discord/auth', [
+        DiscordController::class,
+        'authenticate'
+    ]);
 });

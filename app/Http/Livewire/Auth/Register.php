@@ -9,6 +9,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Illuminate\Validation\Rules;
+use Laravel\Socialite\Facades\Socialite;
 use Livewire\Component;
 use Phpsa\FilamentPasswordReveal\Password;
 

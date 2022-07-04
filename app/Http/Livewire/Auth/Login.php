@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Auth;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -80,8 +82,16 @@ class Login extends Component implements HasForms
             Password::make('password')
                 ->label('Password')
                 ->required(),
-            Checkbox::make('remember')
-                ->label('Remember me')
+            Grid::make()
+                ->schema([
+                    Checkbox::make('remember')
+                        ->label('Remember me'),
+                    Placeholder::make('forgot_password')
+                        ->view('components.auth.forgot-password-link')
+                ])
+                ->columns([
+                    'default' => 2
+                ])
         ];
     }
 }

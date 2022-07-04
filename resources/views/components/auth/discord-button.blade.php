@@ -1,11 +1,11 @@
-<button
-    type="button"
-    class="p-4 px-6 bg-[#23272a] rounded-lg transition duration-150 hover:bg-[#36393f]"
+<a
+    href="{{route('discord.redirect')}}"
+    {{$attributes->class('h-9 w-full flex items-center justify-center px-6 bg-[#23272a] rounded-lg transition duration-150 hover:bg-[#36393f]')->except('type')}}
 >
     <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 79.99 15"
-        class="h-9 w-auto"
+        class="h-5 w-auto"
     >
         <g>
             <g>
@@ -61,4 +61,4 @@
             </g>
         </g>
     </svg>
-</button>
+</a>

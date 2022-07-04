@@ -351,3 +351,9 @@ a.filament-stats-card:focus .text-gray-500,
 a.filament-stats-card:focus .text-gray-600 {
     @apply text-white !important;
 }
+
+.filament-forms-component-container .filament-forms-component-container > div {
+    @apply w-full !important;
+    @apply flex !important;
+    @apply items-center !important;
+}
