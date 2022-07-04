@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\RelationManagers\AuditsRelationManager;
 use App\Filament\Resources\ArticleCategoryResource\Pages;
 use App\Filament\Resources\ArticleCategoryResource\RelationManagers;
 use App\Models\ArticleCategory;
@@ -21,6 +22,8 @@ class ArticleCategoryResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $navigationGroup = 'News';
+
+    protected static ?string $label = 'Category';
 
     public static function form(Form $form): Form
     {
@@ -99,7 +102,8 @@ class ArticleCategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\ArticlesRelationManager::class
+            RelationManagers\ArticlesRelationManager::class,
+            AuditsRelationManager::class
         ];
     }
 

@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\RelationManagers\AuditsRelationManager;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Pages\Actions\DeleteAction;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -22,6 +24,8 @@ class ProductResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $navigationGroup = 'Store';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -54,10 +58,20 @@ class ProductResource extends Resource
                             ->label('Published at')
                             ->nullable()
                             ->withoutSeconds()
-                            ->dehydrateStateUsing(function ($state) {
+                            ->dehydrateStateUsing(function ($state, $record) {
+                                if (empty($state)) {
+                                    return null;
+                                }
+
                                 $now = now();
 
                                 $parsedState = Carbon::parse($state);
+
+                                if ($record->published_at !== null
+                                    && $parsedState->equalTo($record->published_at)) {
+                                    return $parsedState;
+                                }
+
                                 if ($parsedState->isBefore($now)) {
                                     return $now;
                                 }
@@ -68,16 +82,26 @@ class ProductResource extends Resource
                             ->label('Expires at')
                             ->nullable()
                             ->withoutSeconds()
-                            ->dehydrateStateUsing(function ($state) {
+                            ->dehydrateStateUsing(function ($state, $record) {
+                                if (empty($state)) {
+                                    return null;
+                                }
+
                                 $now = now();
 
                                 $parsedState = Carbon::parse($state);
+
+                                if ($record->expires_at !== null
+                                    && $parsedState->equalTo($record->expires_at)) {
+                                    return $parsedState;
+                                }
+
                                 if ($parsedState->isBefore($now)) {
                                     return $now;
                                 }
 
                                 return $parsedState;
-                            })
+                            }),
                     ])
                     ->columns([
                         'sm' => 2
@@ -134,6 +158,8 @@ class ProductResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->modalHeading('Delete Product')
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -143,7 +169,8 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\FieldsRelationManager::class
+            RelationManagers\FieldsRelationManager::class,
+            AuditsRelationManager::class
         ];
     }
 

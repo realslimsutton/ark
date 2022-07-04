@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\RelationManagers\AuditsRelationManager;
 use App\Filament\Resources\ProductCategoryResource\Pages;
 use App\Filament\Resources\ProductCategoryResource\RelationManagers;
 use App\Models\ProductCategory;
@@ -18,9 +19,13 @@ class ProductCategoryResource extends Resource
 {
     protected static ?string $model = ProductCategory::class;
 
+    protected static ?string $label = 'Category';
+
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $navigationGroup = 'Store';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -90,6 +95,8 @@ class ProductCategoryResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->modalHeading('Delete Category')
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -99,7 +106,7 @@ class ProductCategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AuditsRelationManager::class
         ];
     }
 

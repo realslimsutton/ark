@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Tags\HasTags;
 
 class Product extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, HasTags;
+    use HasFactory, InteractsWithMedia, HasTags, LogsActivity;
 
     protected $fillable = [
         'name',
@@ -53,5 +55,12 @@ class Product extends Model implements HasMedia
         return $this->belongsToMany(ProductField::class)
             ->using(ProductProductField::class)
             ->withPivot('config');
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnlyDirty()
+            ->logFillable();
     }
 }

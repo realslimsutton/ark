@@ -10,6 +10,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Livewire\Component;
+use Phpsa\FilamentPasswordReveal\Password;
 
 class Login extends Component implements HasForms
 {
@@ -77,9 +78,8 @@ class Login extends Component implements HasForms
                 ->label('Email address')
                 ->required()
                 ->email(),
-            TextInput::make('password')
+            Password::make('password')
                 ->label('Password')
-                ->password()
                 ->required(),
             Checkbox::make('remember')
                 ->label('Remember me')

@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use AlexJustesen\FilamentSpatieLaravelActivitylog\Contracts\IsActivitySubject;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
-class ProductFieldOption extends Model
+class ProductFieldOption extends Model implements IsActivitySubject
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     protected $fillable = [
         'name',
@@ -39,5 +43,17 @@ class ProductFieldOption extends Model
                 return str_starts_with($lower, 'rgb');
             }
         );
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnlyDirty()
+            ->logFillable();
+    }
+
+    public function getActivitySubjectDescription(Activity $activity): string
+    {
+        return $this->name;
     }
 }

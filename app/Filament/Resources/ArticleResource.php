@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\RelationManagers\AuditsRelationManager;
 use App\Filament\Resources\ArticleResource\Pages;
 use App\Filament\Resources\ArticleResource\RelationManagers;
 use App\Models\Article;
@@ -56,10 +57,20 @@ class ArticleResource extends Resource
                             ->label('Published at')
                             ->nullable()
                             ->withoutSeconds()
-                            ->dehydrateStateUsing(function ($state) {
+                            ->dehydrateStateUsing(function ($state, $record) {
+                                if (empty($state)) {
+                                    return null;
+                                }
+
                                 $now = now();
 
                                 $parsedState = Carbon::parse($state);
+
+                                if ($record->published_at !== null
+                                    && $parsedState->equalTo($record->published_at)) {
+                                    return $parsedState;
+                                }
+
                                 if ($parsedState->isBefore($now)) {
                                     return $now;
                                 }
@@ -133,6 +144,8 @@ class ArticleResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->modalHeading('Delete Article')
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -142,7 +155,7 @@ class ArticleResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AuditsRelationManager::class
         ];
     }
 

@@ -14,8 +14,8 @@ return new class extends Migration {
     {
         Schema::create('product_field_field_option', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_field_id')->index()->constrained();
-            $table->foreignId('product_field_option_id')->index()->constrained();
+            $table->foreignId('product_field_id')->index()->constrained()->cascadeOnDelete();
+            $table->foreignId('product_field_option_id')->index()->constrained()->cascadeOnDelete();
         });
     }
 

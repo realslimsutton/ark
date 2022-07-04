@@ -296,3 +296,19 @@ button.text-primary-700 {
 .filament-tables-pagination-item {
     @apply ring-secondary-light !important;
 }
+
+button.hover\:text-gray-800 {
+    @apply hover:text-secondary-dark !important;
+}
+
+button.focus\:text-primary-600 {
+    @apply focus:text-secondary-light !important;
+}
+
+.filament-sidebar-group > button p, .filament-sidebar-group > button svg {
+    @apply text-neutral-500 !important;
+}
+
+.filament-tables-button-action.bg-white {
+    @apply text-white !important;
+}

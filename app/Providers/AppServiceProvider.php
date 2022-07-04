@@ -12,6 +12,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Filament::serving(function () {
+            Filament::registerNavigationGroups([
+                'News',
+                'Store',
+                'Users',
+                'Administration'
+            ]);
+
             Filament::registerRenderHook(
                 'head.end',
                 fn() => app(Vite::class)(['resources/css/admin.css'])

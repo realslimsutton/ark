@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\RelationManagers\ActivitiesRelationManager;
+use App\Filament\RelationManagers\AuditsRelationManager;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
@@ -96,7 +98,9 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\ArticlesRelationManager::class
+            RelationManagers\ArticlesRelationManager::class,
+            ActivitiesRelationManager::class,
+            AuditsRelationManager::class
         ];
     }
 
