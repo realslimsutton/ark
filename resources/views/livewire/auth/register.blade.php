@@ -1,5 +1,5 @@
 <div class="min-h-screen w-full bg-primary-dark flex items-center justify-center">
-    <div class="max-w-md w-full">
+    <div class="max-w-md w-full px-4">
         <form wire:submit.prevent="authenticate" class="space-y-24">
             <div class="flex items-center justify-center">
                 <a
@@ -13,15 +13,17 @@
             <x-filament::card>
                 <div class="flex items-center justify-center mb-8">
                     <h1 class="text-xl text-white font-bold">
-                        Login to your account
+                        Create your account
                     </h1>
                 </div>
 
                 {{$this->form}}
 
                 <x-filament::button type="submit" class="w-full">
-                    Login
+                    Register
                 </x-filament::button>
+
+                <x-auth.discord-button/>
             </x-filament::card>
         </form>
     </div>

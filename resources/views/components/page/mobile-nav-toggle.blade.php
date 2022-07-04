@@ -1,4 +1,4 @@
-<div class="block md:hidden">
+<div class="block lg:hidden">
     <div>
         <button
             class="text-white p-2 rounded-full transition duration-150 hover:bg-secondary-light focus:bg-secondary-dark"

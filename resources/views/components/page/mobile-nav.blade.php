@@ -4,7 +4,7 @@
     x-show="expanded"
     x-collapse
 >
-    <ul class="w-full block md:hidden">
+    <ul class="w-full block lg:hidden">
         <x-page.mobile-nav-item to="#" label="HOME" :active="true"/>
 
         <x-page.mobile-nav-item to="#" label="COMMUNITY" :active="false"/>

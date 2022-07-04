@@ -6,7 +6,9 @@ module.exports = {
     content: [
         './vendor/filament/**/*.blade.php',
         './resources/views/livewire/**/*.blade.php',
-        './resources/views/filament/**/*.blade.php'
+        './resources/views/filament/**/*.blade.php',
+        './resources/views/components/auth/**/*.blade.php',
+        './resources/views/layouts/auth.blade.php'
     ],
     theme: {
         extend: {

@@ -1,4 +1,4 @@
-<div>
+<div class="hidden lg:block">
     <div class="flex items-center text-white font-semibold">
         Hello, {{auth()->user()->name}}
     </div>
