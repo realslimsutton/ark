@@ -11,6 +11,8 @@ class Backups extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
+    protected static ?int $navigationSort = 2;
+
     protected static string $view = 'filament.pages.backups';
 
     protected function getHeading(): string
