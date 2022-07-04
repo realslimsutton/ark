@@ -3,10 +3,15 @@
 return [
 
     'resource' => [
-        'group' => 'Settings',
-        'sort'  => 1,
+        'group' => 'Management',
+        'sort' => 2
     ],
 
-    'paginate' => [5, 10, 25, 50],
+    'paginate' => [
+        5,
+        10,
+        25,
+        50
+    ],
 
 ];

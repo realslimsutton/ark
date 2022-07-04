@@ -2,7 +2,7 @@
 
 namespace App\Filament\RelationManagers;
 
-use AlexJustesen\FilamentSpatieLaravelActivitylog\Resources\ActivityResource;
+use App\Filament\Resources\AuditResource;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
@@ -19,12 +19,12 @@ class AuditsRelationManager extends RelationManager
 
     public static function table(Table $table): Table
     {
-        return ActivityResource::table($table)
+        return AuditResource::table($table)
             ->bulkActions([])
             ->appendActions([
                 Tables\Actions\Action::make('View')
                     ->link()
-                    ->url(fn($record) => ActivityResource::getUrl('view', ['record' => $record]), shouldOpenInNewTab: true),
+                    ->url(fn($record) => AuditResource::getUrl('view', ['record' => $record]), shouldOpenInNewTab: true),
             ]);
     }
 

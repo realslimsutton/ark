@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
             Filament::registerNavigationGroups([
                 'News',
                 'Store',
-                'Users',
+                'Management',
                 'Administration'
             ]);
 
@@ -48,7 +48,8 @@ class AppServiceProvider extends ServiceProvider
             UsedDiskSpaceCheck::new(),
             DatabaseCheck::new(),
             CacheCheck::new(),
-            ScheduleCheck::new(),
+            ScheduleCheck::new()
+                ->heartbeatMaxAgeInMinutes(2),
             DebugModeCheck::new(),
             EnvironmentCheck::new()
         ];

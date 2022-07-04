@@ -18,9 +18,11 @@ class ProductFieldResource extends Resource
 {
     protected static ?string $model = ProductField::class;
 
+    protected static ?string $slug = 'store/fields';
+
     protected static ?string $label = 'Fields';
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-lightning-bolt';
 
     protected static ?string $navigationGroup = 'Store';
 

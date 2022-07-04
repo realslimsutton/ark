@@ -19,6 +19,8 @@ class ProductCategoryResource extends Resource
 {
     protected static ?string $model = ProductCategory::class;
 
+    protected static ?string $slug = 'store/categories';
+
     protected static ?string $label = 'Category';
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';

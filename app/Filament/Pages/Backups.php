@@ -9,26 +9,13 @@ use Filament\Pages\Page;
 
 class Backups extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'heroicon-o-cloud-upload';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?string $navigationGroup = 'Management';
+
+    protected static ?int $navigationSort = 4;
 
     protected static string $view = 'filament.pages.backups';
-
-    protected function getHeading(): string
-    {
-        return __('filament-spatie-backup::backup.pages.backups.heading');
-    }
-
-    protected static function getNavigationGroup(): ?string
-    {
-        return __('filament-spatie-backup::backup.pages.backups.navigation.group');
-    }
-
-    protected static function getNavigationLabel(): string
-    {
-        return __('filament-spatie-backup::backup.pages.backups.navigation.label');
-    }
 
     protected function getActions(): array
     {
