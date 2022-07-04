@@ -1,5 +1,8 @@
 <?php
 
+use App\Filament\Widgets\StatsOverviewWidget;
+use App\Filament\Widgets\TotalDonationsWidget;
+use App\Filament\Widgets\ApplicationStatisticsWidget;
 use App\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Http\Middleware\MirrorConfigToSubpackages;
@@ -139,9 +142,9 @@ return [
 
     'widgets' => [
         'namespace' => 'App\\Filament\\Widgets',
-        'path' => app_path('Filament/Widgets'),
+        'path' => null,
         'register' => [
-            Widgets\AccountWidget::class
+            StatsOverviewWidget::class
         ],
     ],
 

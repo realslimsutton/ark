@@ -316,3 +316,38 @@ button.focus\:text-primary-600 {
 .filament-page-button-action.bg-white {
     @apply focus:text-white !important;
 }
+
+.filament-stats-overview-widget > div {
+    @apply bg-transparent !important;
+}
+
+canvas span.text-danger-50 {
+    @apply text-secondary-dark/40 !important;
+}
+
+canvas span.text-success-50 {
+    @apply text-green-600/40 !important;
+}
+
+canvas span.text-gray-50 {
+    @apply text-primary-dark/40 !important;
+}
+
+a.filament-stats-card {
+    @apply transition !important;
+    @apply duration-150 !important;
+    @apply hover:bg-secondary-light !important;
+    @apply focus:bg-secondary-dark !important;
+}
+
+a.filament-stats-card .text-gray-500, a.filament-stats-card .text-gray-600 {
+    @apply transition !important;
+    @apply duration-150 !important;
+}
+
+a.filament-stats-card:hover .text-gray-500,
+a.filament-stats-card:hover .text-gray-600,
+a.filament-stats-card:focus .text-gray-500,
+a.filament-stats-card:focus .text-gray-600 {
+    @apply text-white !important;
+}

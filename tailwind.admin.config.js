@@ -5,7 +5,8 @@ const colors = require('tailwindcss/colors');
 module.exports = {
     content: [
         './vendor/filament/**/*.blade.php',
-        './resources/views/livewire/**/*.blade.php'
+        './resources/views/livewire/**/*.blade.php',
+        './resources/views/filament/**/*.blade.php'
     ],
     theme: {
         extend: {
