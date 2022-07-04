@@ -49,6 +49,6 @@ class Backups extends Page
 
         $this->dispatchBrowserEvent('close-modal', ['id' => 'backup-option']);
 
-        $this->notify('success', __('filament-spatie-backup::backup.pages.backups.messages.backup_success'));
+        $this->notify('success', 'Backup is being created');
     }
 }
