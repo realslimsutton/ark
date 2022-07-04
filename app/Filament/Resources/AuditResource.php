@@ -20,6 +20,8 @@ class AuditResource extends Resource
 {
     protected static ?string $model = Activity::class;
 
+    protected static ?string $slug = 'management/audits';
+
     protected static ?string $label = 'Audit';
 
     protected static ?string $navigationIcon = 'heroicon-o-table';

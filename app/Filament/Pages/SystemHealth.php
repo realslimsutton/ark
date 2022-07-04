@@ -13,6 +13,8 @@ class SystemHealth extends Page
 {
     protected $listeners = ['refreshComponent' => '$refresh'];
 
+    protected static ?string $slug = 'management/system-health';
+
     protected static ?string $navigationIcon = 'heroicon-o-heart';
 
     protected static ?string $navigationGroup = 'Management';

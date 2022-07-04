@@ -9,6 +9,8 @@ use Filament\Pages\Page;
 
 class Backups extends Page
 {
+    protected static ?string $slug = 'management/backups';
+
     protected static ?string $navigationIcon = 'heroicon-o-cloud-upload';
 
     protected static ?string $navigationGroup = 'Management';
