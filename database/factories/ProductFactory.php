@@ -24,7 +24,7 @@ class ProductFactory extends Factory
             'slug' => Str::slug($name),
             'description' => '',
             'price' => rand(1, 5000),
-            'category_id' => rand(2, 11),
+            'category_id' => rand(1, 10),
             'published_at' => rand(0, 1) === 1 ? now() : null,
             'expires_at' => rand(0, 1) === 1 ? now()->addDays(rand(1, 30)) : null
         ];
