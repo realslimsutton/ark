@@ -7,7 +7,7 @@
         />
 
         <x-page.primary-nav-item
-            to="#"
+            to="{{route('store.index')}}"
             label="STORE"
             :active="str_starts_with(request()->route()->getName(), 'store')"
         />
