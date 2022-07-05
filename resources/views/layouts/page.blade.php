@@ -25,10 +25,13 @@
                 <div class="mt-20">
                     <div
                         id="page-title-container"
+                        style="background-image: url('{{asset('images/819763.jpg')}}')"
                     >
-                        <h1 class="text-6xl text-white font-bold uppercase">
-                            @yield('title')
-                        </h1>
+                        <div class="relative z-20">
+                            <h1 class="text-6xl text-white font-bold uppercase">
+                                @yield('title')
+                            </h1>
+                        </div>
                     </div>
 
                     <div class="py-8">
