@@ -17,7 +17,7 @@
                 return value.toLocaleString();
             },
             from: function (value) {
-                return parseInt(value);
+                return parseInt(value.replace(/\D/g,''));
             }
         },
         step: 1,
