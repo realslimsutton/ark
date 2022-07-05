@@ -6,7 +6,7 @@
     </div>
 
     <div class="grid lg:grid-cols-3 gap-6">
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:col-span-2">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:col-span-2 order-last lg:order-first">
             @foreach($products as $product)
                 <x-store.product-summary :product="$product"/>
             @endforeach
@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div class="space-y-6">
+        <div class="space-y-6 order-first lg:order-last">
             <x-landing.sidebar.box>
                 <x-slot:title>
                     Search
