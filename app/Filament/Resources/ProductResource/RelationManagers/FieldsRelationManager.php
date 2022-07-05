@@ -51,6 +51,10 @@ class FieldsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
+                Tables\Actions\CreateAction::make()
+                    ->button()
+                    ->url(route('filament.resources.store/fields.create'))
+                    ->openUrlInNewTab(),
                 AttachButton::make()
             ])
             ->actions([
