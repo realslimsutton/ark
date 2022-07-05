@@ -28,9 +28,7 @@
                         style="background-image: url('{{asset('images/819763.jpg')}}')"
                     >
                         <div class="relative z-20">
-                            <h1 class="text-6xl text-white font-bold uppercase">
-                                @yield('title')
-                            </h1>
+                            <h1 class="text-6xl text-white font-bold uppercase"></h1>
                         </div>
                     </div>
 
