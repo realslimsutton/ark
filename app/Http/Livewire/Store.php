@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use DB;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -18,17 +19,22 @@ class Store extends Component
 
     public $minLimit;
 
-    public $min;
+    public $min = '';
 
     public $maxLimit;
 
-    public $max;
+    public $max = '';
 
     public $categories;
 
+    public $sort = 'default';
+
     protected $queryString = [
         'category' => ['except' => ''],
-        'search' => ['except' => '']
+        'search' => ['except' => ''],
+        'min' => ['except' => ''],
+        'max' => ['except' => ''],
+        'sort' => ['except' => 'default']
     ];
 
     public function mount()
@@ -72,10 +78,9 @@ class Store extends Component
             ->whereRaw(DB::raw('(expires_at IS NULL OR NOW() <= expires_at)'))
             ->when(!empty($this->search), function ($query) {
                 $query->where('name', 'LIKE', '%' . $this->search . '%');
-            })
-            ->orderByDesc('expires_at')
-            ->orderByDesc('published_at')
-            ->paginate();
+            });
+
+        $products = $this->sort($products)->paginate();
 
         return view('livewire.store', [
             'products' => $products
@@ -85,5 +90,16 @@ class Store extends Component
     public function setCategory(int|null $id = null)
     {
         $this->category = $id ?? '';
+    }
+
+    private function sort(Builder $products): Builder
+    {
+        return match ($this->sort) {
+            'latest' => $products->orderByDesc('published_at'),
+            'price-low-to-high' => $products->orderBy('price'),
+            'price-high-to-low' => $products->orderByDesc('price'),
+            default => $products->orderByDesc('expires_at')
+                ->orderByDesc('published_at'),
+        };
     }
 }
