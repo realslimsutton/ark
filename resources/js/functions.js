@@ -62,11 +62,10 @@ window.mergeTooltips = function (slider, threshold, separator) {
 
                     // Center this tooltip over the affected handles
                     tooltips[handleNumber].innerHTML = poolValues[poolIndex].join(separator);
-                    tooltips[handleNumber].style.display = 'block';
+                    tooltips[handleNumber].classList.remove('hidden');
                     tooltips[handleNumber].style[direction] = offset + '%';
-                } else {
-                    // Hide this tooltip
-                    tooltips[handleNumber].style.display = 'none';
+                } else if (!tooltips[handleNumber].classList.contains('hidden')) {
+                    tooltips[handleNumber].classList.add('hidden');
                 }
             }
         });

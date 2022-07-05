@@ -1,14 +1,20 @@
 @props(['minPrice', 'maxPrice'])
 
-<div
-    x-data
-    x-init="
+<x-landing.sidebar.box>
+    <x-slot:title>
+        FILTER BY PRICE
+    </x-slot:title>
+
+    <div class="px-4">
+        <div
+            x-data
+            x-init="
     window.noUiSlider.create($refs.priceSlider, {
         start: [ {{$minPrice}}, {{$maxPrice}} ],
         tooltips: true,
         format: {
             to: function (value) {
-                return value.toFixed(0);
+                return value.toLocaleString();
             },
             from: function (value) {
                 return parseInt(value);
@@ -29,7 +35,9 @@
         @this.set('max', values[1]);
     });
     "
-    wire:ignore
->
-    <div x-ref="priceSlider"></div>
-</div>
+            wire:ignore
+        >
+            <div x-ref="priceSlider"></div>
+        </div>
+    </div>
+</x-landing.sidebar.box>

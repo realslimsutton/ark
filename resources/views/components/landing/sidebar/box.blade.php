@@ -1,4 +1,4 @@
-<div class="rounded-b bg-primary-default">
+<div class="rounded bg-primary-default">
     <div>
         <h2 class="sidebar-title bg-primary-accent text-lg text-white font-bold uppercase rounded-t">
             <span>

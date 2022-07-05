@@ -17,30 +17,6 @@ if (document.getElementsByName('.glide').length > 0) {
 
 window.noUiSlider = noUiSlider;
 
-const sliders = document.querySelectorAll('[data-slider-range]');
-for (let slider of sliders) {
-    noUiSlider.create(slider, {
-        start: [ 0, 100 ],
-        tooltips: true,
-        format: {
-            to: function (value) {
-                return value;
-            },
-            from: function (value) {
-                return parseInt(value);
-            }
-        },
-        step: 1,
-        connect: true,
-        range: {
-            min: parseInt(slider.getAttribute('data-min')),
-            max: parseInt(slider.getAttribute('data-max'))
-        }
-    });
-
-    mergeTooltips(slider, 15, ' - ');
-}
-
 window.sum = function (start, values) {
     let total = parseInt(start);
     for (let key in values) {

@@ -147,10 +147,40 @@ html::-webkit-scrollbar-thumb {
     z-index: 1;
 }
 
-#slider-hide .noUi-tooltip {
-    display: none;
+.noUi-tooltip {
+    display: none !important;
+    @apply p-2 !important;
+    @apply text-sm !important;
+    @apply font-semibold !important;
+    @apply bg-primary-dark !important;
+    @apply shadow !important;
+    @apply border-primary-accent !important;
+    @apply text-white !important;
 }
 
-#slider-hide .noUi-active .noUi-tooltip {
-    display: block;
+.noUi-state-drag .hidden {
+    display: none !important;
+}
+
+.noUi-state-drag .noUi-tooltip:not(.hidden) {
+    display: block !important;
+}
+
+.noUi-connect {
+    @apply bg-secondary-light !important;
+}
+
+.noUi-handle {
+    @apply bg-secondary-dark !important;
+    @apply shadow !important;
+    @apply border-0 !important;
+    @apply rounded-full !important;
+    @apply cursor-grab !important;
+    @apply active:cursor-grabbing !important;
+}
+
+.noUi-target {
+    @apply shadow !important;
+    @apply bg-primary-dark !important;
+    @apply border-primary-accent !important;
 }
