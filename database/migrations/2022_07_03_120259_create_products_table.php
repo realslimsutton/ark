@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->integer('price');
             $table->unsignedBigInteger('category_id')->index();
             $table->timestamp('published_at')->nullable()->index();

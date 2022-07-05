@@ -15,22 +15,24 @@
         <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        @livewireStyles
     </head>
 
     <body class="antialiased bg-primary-dark">
         <div class="min-h-screen w-full flex flex-col justify-between">
-            <div>
+            <div class="flex-grow">
                 <x-page.header/>
 
                 <div class="mt-20">
-                    <div
-                        id="page-title-container"
-                        style="background-image: url('{{asset('images/819763.jpg')}}')"
-                    >
-                        <div class="relative z-20">
-                            <h1 class="text-6xl text-white font-bold uppercase"></h1>
-                        </div>
-                    </div>
+                    {{--                    <div--}}
+                    {{--                        id="page-title-container"--}}
+                    {{--                        style="background-image: url('{{asset('images/819763.jpg')}}')"--}}
+                    {{--                    >--}}
+                    {{--                        <div class="relative z-20">--}}
+                    {{--                            <h1 class="text-6xl text-white font-bold uppercase"></h1>--}}
+                    {{--                        </div>--}}
+                    {{--                    </div>--}}
 
                     <div class="py-8">
                         @yield('content')
@@ -40,5 +42,7 @@
 
             <x-page.footer/>
         </div>
+
+        @livewireScripts
     </body>
 </html>
