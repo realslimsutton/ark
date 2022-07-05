@@ -31,7 +31,9 @@ class OptionsRelationManager extends RelationManager
                     ->maxLength(255),
                 Forms\Components\TextInput::make('additional_price')
                     ->integer()
+                    ->required()
                     ->minValue(0)
+                    ->default(0)
             ]);
     }
 

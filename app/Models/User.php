@@ -14,13 +14,11 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements FilamentUser, MustVerifyEmail, HasMedia, IsActivitySubject
+class User extends Authenticatable implements FilamentUser, MustVerifyEmail, IsActivitySubject
 {
-    use HasFactory, Notifiable, HasRoles, InteractsWithMedia, LogsActivity, CausesActivity;
+    use HasFactory, Notifiable, HasRoles, LogsActivity, CausesActivity;
 
     protected $with = [
         'discord'
@@ -61,7 +59,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Has
     {
         return LogOptions::defaults()
             ->logOnlyDirty()
-            ->logFillable();
+            ->logExcept(['password'])
+            ->dontSubmitEmptyLogs();
     }
 
     public function getActivitySubjectDescription(Activity $activity): string

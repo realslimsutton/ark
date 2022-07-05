@@ -90,7 +90,8 @@ class ArticleResource extends Resource
 
                 Forms\Components\Card::make()
                     ->schema([
-                        Forms\Components\SpatieMediaLibraryFileUpload::make('thumbnail'),
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('thumbnail')
+                            ->collection('thumbnail'),
                         Forms\Components\Placeholder::make('created_at')
                             ->label('Created at')
                             ->content(fn(?Article $record): string => $record?->created_at?->diffForHumans() ?? '-'),

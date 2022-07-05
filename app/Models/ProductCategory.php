@@ -28,7 +28,7 @@ class ProductCategory extends Model implements IsActivitySubject
     {
         return LogOptions::defaults()
             ->logOnlyDirty()
-            ->logFillable();
+            ->dontSubmitEmptyLogs();
     }
 
     public function getActivitySubjectDescription(Activity $activity): string

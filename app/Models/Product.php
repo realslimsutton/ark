@@ -62,7 +62,7 @@ class Product extends Model implements HasMedia
     {
         return LogOptions::defaults()
             ->logOnlyDirty()
-            ->logFillable();
+            ->dontSubmitEmptyLogs();
     }
 
     public function thumbnail(): Attribute

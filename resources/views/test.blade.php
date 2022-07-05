@@ -29,7 +29,15 @@
 
                     <div>
                         @forelse($product->fields as $field)
+                            @if($field->options->isEmpty())
+                                @continue
+                            @endif
+
                             <label class="flex items-center space-x-2">
+                                @if($field->thumbnail !== null)
+                                    <img src="{{$field->thumbnail}}" alt="{{$field->name}}" class="h-auto w-32 rounded"/>
+                                @endif
+
                                 <span class="block">
                                     {{$field->name}}:
                                 </span>
