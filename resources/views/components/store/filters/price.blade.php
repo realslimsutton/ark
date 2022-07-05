@@ -31,8 +31,8 @@
     window.mergeTooltips($refs.priceSlider, 15, ' - ');
 
     $refs.priceSlider.noUiSlider.on('set', function(values) {
-        @this.set('min', values[0]);
-        @this.set('max', values[1]);
+        @this.set('min', parseInt(values[0].toString().replace(/\D/g,'')));
+        @this.set('max', parseInt(values[1].toString().replace(/\D/g,'')));
     });
     "
             wire:ignore
