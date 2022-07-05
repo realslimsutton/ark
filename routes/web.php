@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\DiscordController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\StoreController;
 use App\Http\Controllers\TestController;
 use App\Http\Livewire\Auth\ForgotPassword;
 use App\Http\Livewire\Auth\Login;
@@ -29,6 +30,18 @@ Route::get('/test/{id}', [
     TestController::class,
     'show'
 ])->name('test');
+
+Route::middleware([
+    'auth',
+    'verified'
+])
+    ->prefix('/store')
+    ->name('store.')->group(function () {
+        Route::get('/', [
+            StoreController::class,
+            'index'
+        ])->name('index');
+    });
 
 Route::middleware('guest')->group(function () {
     Route::get('/discord/redirect', [

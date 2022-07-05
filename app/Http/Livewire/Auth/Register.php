@@ -64,7 +64,8 @@ class Register extends Component implements HasForms
             TextInput::make('name')
                 ->label('Username')
                 ->required()
-                ->maxLength(255),
+                ->maxLength(255)
+                ->unique('users', 'name'),
             TextInput::make('email')
                 ->label('Email address')
                 ->required()

@@ -122,3 +122,13 @@ html::-webkit-scrollbar-thumb {
     background-color: rgba(24, 28, 35, .04);
     z-index: 1;
 }
+
+#page-title-container {
+    @apply w-full;
+    @apply py-36;
+    @apply flex;
+    @apply items-center;
+    @apply justify-center;
+    @apply bg-primary-accent;
+    @apply bg-repeat;
+}
