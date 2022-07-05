@@ -146,3 +146,11 @@ html::-webkit-scrollbar-thumb {
     @apply bg-black/50;
     z-index: 1;
 }
+
+#slider-hide .noUi-tooltip {
+    display: none;
+}
+
+#slider-hide .noUi-active .noUi-tooltip {
+    display: block;
+}

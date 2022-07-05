@@ -20,6 +20,7 @@
         "vite": "^2.9.11"
     },
     "dependencies": {
-        "@alpinejs/collapse": "^3.10.2"
+        "@alpinejs/collapse": "^3.10.2",
+        "nouislider": "^15.6.0"
     }
 }
