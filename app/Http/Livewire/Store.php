@@ -58,8 +58,8 @@ class Store extends Component
                 $query->where('name', 'LIKE', '%' . $this->search . '%');
             })
             ->whereBetween('price', [
-                $this->min,
-                $this->max
+                (int)$this->min,
+                (int)$this->max
             ])
             ->orderByDesc('created_at')
             ->paginate();
