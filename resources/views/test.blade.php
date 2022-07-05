@@ -1,4 +1,4 @@
-@extends('layouts.landing')
+@extends('layouts.page')
 
 @section('content')
     <div class="text-white font-medium">
