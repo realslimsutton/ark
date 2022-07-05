@@ -25,7 +25,6 @@
                 <div class="mt-20">
                     <div
                         id="page-title-container"
-                        style="background-image: url('{{asset('images/diagonales-decalees.png')}}')"
                     >
                         <h1 class="text-6xl text-white font-bold uppercase">
                             @yield('title')
