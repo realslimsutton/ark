@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
+use DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -54,15 +55,17 @@ class Store extends Component
             ->when(!empty($this->category), function ($query) {
                 $query->where('category_id', '=', $this->category);
             })
-            ->when(!empty($this->search), function ($query) {
-                $query->where('name', 'LIKE', '%' . $this->search . '%');
-            })
             ->whereBetween('price', [
                 $this->min,
                 $this->max
             ])
-            ->orderByDesc('created_at')
-            ->paginate();
+            ->whereRaw(DB::raw('(published_at IS NULL OR NOW() >= published_at)'))
+            ->whereRaw(DB::raw('(expires_at IS NULL OR NOW() <= expires_at)'))
+            ->when(!empty($this->search), function ($query) {
+                $query->where('name', 'LIKE', '%' . $this->search . '%');
+            })
+            ->orderByDesc('expires_at')
+            ->orderByDesc('published_at');
 
         return view('livewire.store', [
             'products' => $products

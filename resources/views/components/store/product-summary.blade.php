@@ -15,17 +15,9 @@
                 </h3>
 
                 <h3 class="text-lg text-white font-semibold">
-                    <span>{{$product->price}}</span><sup>BB</sup>
+                    <span>{{number_format($product->price)}}</span><sup>BB</sup>
                 </h3>
             </div>
-
-            @if($product->description !== null)
-                <div>
-                    <p class="text-neutral-400">
-                        {{$product->description}}
-                    </p>
-                </div>
-            @endif
 
             <div>
                 <a
