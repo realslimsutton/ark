@@ -80,7 +80,7 @@ class FieldsRelationManager extends RelationManager
                     }),
                 Tables\Actions\Action::make('edit')
                     ->link()
-                    ->url(fn($record) => route('filament.resources.product-fields.edit', [$record->id]))
+                    ->url(fn($record) => route('filament.resources.store/fields.edit', [$record->id]))
                     ->openUrlInNewTab(),
                 Tables\Actions\DetachAction::make()
             ])
