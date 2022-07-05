@@ -17,19 +17,11 @@
         </div>
 
         <div class="space-y-6 order-first lg:order-last">
-            <x-landing.sidebar.box>
-                <x-slot:title>
-                    Search
-                </x-slot:title>
-
-                <input
-                    type="search"
-                    wire:model.debounce.500ms="search"
-                    class="w-full bg-primary-dark rounded border border-primary-accent text-white transition duration-150 hover:border-secondary-light focus:ring-0 focus:border-secondary-dark"
-                />
-            </x-landing.sidebar.box>
+            <x-store.filters.search/>
 
             <x-store.filters.price :min-price="$this->minLimit" :max-price="$this->maxLimit"/>
+
+            <x-store.filters.categories :categories="$categories" :category-id="$this->category"/>
         </div>
     </div>
 </div>

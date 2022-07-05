@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use DB;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -23,6 +24,8 @@ class Store extends Component
 
     public $max;
 
+    public $categories;
+
     protected $queryString = [
         'category' => ['except' => ''],
         'search' => ['except' => '']
@@ -30,6 +33,12 @@ class Store extends Component
 
     public function mount()
     {
+        $this->categories = ProductCategory::all()
+            ->mapWithKeys(fn(ProductCategory $category) => [
+                $category->id => $category->title
+            ])
+            ->all();
+
         $prices = Product::query()
             ->selectRaw(" MIN(price) AS min_price, MAX(price) AS max_price")
             ->first();
@@ -75,6 +84,6 @@ class Store extends Component
 
     public function setCategory(int|null $id = null)
     {
-        $this->category = $id;
+        $this->category = $id ?? '';
     }
 }
