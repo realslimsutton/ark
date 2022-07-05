@@ -33,11 +33,11 @@ class Store extends Component
             ->selectRaw(" MIN(price) AS min_price, MAX(price) AS max_price")
             ->first();
 
-        $this->minLimit = $prices->min_price;
-        $this->min = $prices->min_price;
+        $this->minLimit = $prices->min_price ?? 0;
+        $this->min = $this->minLimit;
 
-        $this->maxLimit = $prices->max_price;
-        $this->max = $prices->max_price;
+        $this->maxLimit = $prices->max_price ?? 1;
+        $this->max = $this->maxLimit;
     }
 
     public function render()
