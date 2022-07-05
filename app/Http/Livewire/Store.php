@@ -65,7 +65,8 @@ class Store extends Component
                 $query->where('name', 'LIKE', '%' . $this->search . '%');
             })
             ->orderByDesc('expires_at')
-            ->orderByDesc('published_at');
+            ->orderByDesc('published_at')
+            ->paginate();
 
         return view('livewire.store', [
             'products' => $products
