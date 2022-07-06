@@ -4,7 +4,16 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
     content: [
         './resources/views/**/*.blade.php',
-        './resources/js/**/*.js'
+        './resources/js/**/*.js',
+        '/vendor/wire-elements/modal/resources/views/*.blade.php',
+        './storage/framework/views/*.php'
+    ],
+    safelist: [
+        'sm:max-w-md',
+        'md:max-w-xl',
+        'lg:max-w-2xl',
+        'sm:max-w-sm',
+        'sm:max-w-md'
     ],
     theme: {
         extend: {

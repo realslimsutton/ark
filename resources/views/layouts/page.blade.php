@@ -25,15 +25,6 @@
                 <x-page.header/>
 
                 <div class="mt-20">
-                    {{--                    <div--}}
-                    {{--                        id="page-title-container"--}}
-                    {{--                        style="background-image: url('{{asset('images/819763.jpg')}}')"--}}
-                    {{--                    >--}}
-                    {{--                        <div class="relative z-20">--}}
-                    {{--                            <h1 class="text-6xl text-white font-bold uppercase"></h1>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
-
                     <div class="py-8">
                         @yield('content')
                     </div>
@@ -44,5 +35,6 @@
         </div>
 
         @livewireScripts
+        @livewire('livewire-ui-modal')
     </body>
 </html>

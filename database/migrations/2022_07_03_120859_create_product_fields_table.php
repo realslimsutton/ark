@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('product_fields', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('in_table');
             $table->timestamps();
         });
     }

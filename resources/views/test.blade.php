@@ -7,8 +7,7 @@
                 x-data="{
                     price: {{$product->price}},
                     selectedOptions: {{json_encode($fieldIds)}}
-                }
-            "
+                }"
                 x-init="sum({{$product->price}}, selectedOptions)">
                 <div>
                     Name: {{$product->name}}

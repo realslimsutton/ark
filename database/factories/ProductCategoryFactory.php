@@ -17,11 +17,10 @@ class ProductCategoryFactory extends Factory
      */
     public function definition()
     {
-        $title = fake()->sentence();
+        $title = fake()->word();
 
         return [
             'title' => $title,
-            'slug' => Str::slug($title),
             'description' => null
         ];
     }

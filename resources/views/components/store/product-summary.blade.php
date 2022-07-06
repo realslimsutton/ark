@@ -1,7 +1,7 @@
 @props(['product'])
 
 <div class="w-full flex flex-col flex-grow">
-    <a href="#" class="block">
+    <a href="{{route('store.show', [$product->slug])}}" class="block">
         @if($product->thumbnail !== null)
             <div class="bg-primary-accent/60 p-4 rounded">
                 <img src="{{$product->thumbnail}}" alt="{{$product->name}}"/>

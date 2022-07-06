@@ -74,8 +74,8 @@ class Store extends Component
                 $this->min,
                 $this->max
             ])
-            ->whereRaw(DB::raw('(published_at IS NULL OR NOW() >= published_at)'))
-            ->whereRaw(DB::raw('(expires_at IS NULL OR NOW() <= expires_at)'))
+            ->whereRaw(DB::raw('(published_at IS NOT NULL AND NOW() >= published_at)'))
+            ->whereRaw(DB::raw('(expires_at IS NOT NULL AND NOW() <= expires_at)'))
             ->when(!empty($this->search), function ($query) {
                 $query->where('name', 'LIKE', '%' . $this->search . '%');
             });

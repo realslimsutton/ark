@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\DiscordController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\TestController;
+use App\Http\Livewire\Store;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,8 +29,7 @@ Route::get('/test/{id}', [
 ])->name('test');
 
 Route::middleware([
-    'auth',
-    'verified'
+    'auth'
 ])
     ->prefix('/store')
     ->name('store.')->group(function () {
@@ -37,6 +37,8 @@ Route::middleware([
             StoreController::class,
             'index'
         ])->name('index');
+
+        Route::get('/product/{slug}', [StoreController::class, 'show'])->name('show');
     });
 
 Route::middleware('guest')->group(function () {

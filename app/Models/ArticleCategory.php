@@ -16,7 +16,6 @@ class ArticleCategory extends Model implements IsActivitySubject
 
     protected $fillable = [
         'title',
-        'slug',
         'description'
     ];
 

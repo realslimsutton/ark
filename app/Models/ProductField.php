@@ -18,7 +18,12 @@ class ProductField extends Model implements HasMedia, IsActivitySubject
     use HasFactory, InteractsWithMedia, LogsActivity;
 
     protected $fillable = [
-        'name'
+        'name',
+        'in_table'
+    ];
+
+    protected $casts = [
+        'in_table' => 'boolean'
     ];
 
     public function registerMediaCollections(): void

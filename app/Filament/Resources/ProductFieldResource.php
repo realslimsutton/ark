@@ -35,7 +35,10 @@ class ProductFieldResource extends Resource
                 Forms\Components\Card::make()
                     ->schema([
                         Forms\Components\TextInput::make('name')
-                            ->required()
+                            ->required(),
+                        Forms\Components\Checkbox::make('in_table')
+                            ->label('Show in the table')
+                            ->helperText('The field will appear at the bottom of the product page in a table')
                     ])
                     ->columns([
                         'sm' => 2
@@ -83,8 +86,8 @@ class ProductFieldResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\ProductsRelationManager::class,
-            RelationManagers\OptionsRelationManager::class
+            RelationManagers\OptionsRelationManager::class,
+            RelationManagers\ProductsRelationManager::class
         ];
     }
 

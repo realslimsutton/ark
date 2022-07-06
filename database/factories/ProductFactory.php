@@ -17,7 +17,7 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        $name = fake()->sentence();
+        $name = fake()->regexify('[A-Za-z0-9]{13}');
 
         return [
             'name' => $name,
