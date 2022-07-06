@@ -20,8 +20,7 @@ class ProductCategoryFactory extends Factory
         $title = fake()->word();
 
         return [
-            'title' => $title,
-            'description' => null
+            'title' => $title
         ];
     }
 }
