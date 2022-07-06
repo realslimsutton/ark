@@ -21,7 +21,6 @@ class ArticleCategoryFactory extends Factory
 
         return [
             'title' => $title,
-            'slug' => Str::slug($title),
             'description' => null
         ];
     }
