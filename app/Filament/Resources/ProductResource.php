@@ -43,7 +43,6 @@ class ProductResource extends Resource
                             ->required()
                             ->unique(Product::class, 'slug', fn($record) => $record),
                         Forms\Components\MarkdownEditor::make('description')
-                            ->required()
                             ->columnSpan([
                                 'sm' => 2
                             ]),

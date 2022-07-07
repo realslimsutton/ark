@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('value');
             $table->integer('additional_price');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

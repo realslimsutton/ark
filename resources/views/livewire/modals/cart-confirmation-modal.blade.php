@@ -17,7 +17,7 @@
         </button>
 
         <a
-            href="#"
+            href="{{route('store.cart.show')}}"
             class="flex items-center justify-center w-full p-2 rounded bg-primary-dark text-neutral-500 font-semibold transition duration-150 hover:bg-secondary-light hover:text-white focus:text-white focus:bg-secondary-dark"
         >
             Checkout

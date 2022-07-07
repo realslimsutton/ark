@@ -8,6 +8,10 @@
             'text-secondary-light border-secondary-light' => $active
         ])
     >
-        {{$label}}
+        @if($slot->isEmpty())
+            {{$label}}
+        @else
+            {{$slot}}
+        @endif
     </a>
 </li>

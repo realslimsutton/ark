@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\DiscordController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\TestController;
-use App\Http\Livewire\Store;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,7 +38,25 @@ Route::middleware([
             'index'
         ])->name('index');
 
-        Route::get('/product/{slug}', [StoreController::class, 'show'])->name('show');
+        Route::get('/product/{slug}', [
+            StoreController::class,
+            'show'
+        ])->name('show');
+
+        Route::get('/cart', [
+            CartController::class,
+            'show'
+        ])->name('cart.show');
+
+        Route::post('/cart/checkout', [
+            CartController::class,
+            'checkout'
+        ])->name('cart.checkout');
+
+        Route::get('/cart/success', [
+            CartController::class,
+            'success'
+        ])->name('cart.check.out.success');
     });
 
 Route::middleware('guest')->group(function () {

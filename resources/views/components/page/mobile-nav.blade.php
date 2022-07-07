@@ -12,6 +12,12 @@
         />
 
         <x-page.mobile-nav-item
+            to="#"
+            label="DONATE"
+            :active="str_starts_with(request()->route()->getName(), 'donate')"
+        />
+
+        <x-page.mobile-nav-item
             to="{{route('store.index')}}"
             label="STORE"
             :active="str_starts_with(request()->route()->getName(), 'store')"
@@ -61,6 +67,10 @@
                     :active="false"
                 />
             @endif
+
+            <li>
+                <x-page.account-nav :mobile="true"/>
+            </li>
         @endguest
     </ul>
 </div>

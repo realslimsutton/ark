@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id')->index();
             $table->timestamp('published_at')->nullable()->index();
             $table->timestamp('expires_at')->nullable()->index();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('product_categories')->cascadeOnDelete();

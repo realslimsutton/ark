@@ -7,6 +7,12 @@
         />
 
         <x-page.primary-nav-item
+            to="#"
+            label="DONATE"
+            :active="str_starts_with(request()->route()->getName(), 'donate')"
+        />
+
+        <x-page.primary-nav-item
             to="{{route('store.index')}}"
             label="STORE"
             :active="str_starts_with(request()->route()->getName(), 'store')"

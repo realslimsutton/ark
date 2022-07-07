@@ -29,18 +29,18 @@ class Product extends Component
                 'category',
                 'fields',
                 'fields.options',
-                'media' => function($query) {
+                'media' => function ($query) {
                     $query->where('collection_name', '=', 'thumbnail');
                 }
             ])
             ->where('slug', '=', $slug)
             ->whereRaw(DB::raw('(published_at IS NOT NULL AND NOW() >= published_at)'))
-            ->whereRaw(DB::raw('(expires_at IS NOT NULL AND NOW() <= expires_at)'))
+            ->whereRaw(DB::raw('(expires_at IS NULL OR NOW() <= expires_at)'))
             ->firstOrFail();
 
         $this->fieldIds = $this->getFieldIds($this->product);
 
-        foreach($this->product->fields as $field) {
+        foreach ($this->product->fields as $field) {
             $this->selectedOptions[$field->id] = $field->options
                 ->filter(fn($option) => in_array($option->id, $field->pivot->config))
                 ->first()
@@ -57,6 +57,8 @@ class Product extends Component
             'quantity' => $this->numberOfItems,
             'options' => $this->selectedOptions
         ]);
+
+        $this->emit('cartUpdated');
 
         $this->emit('openModal', 'modals.cart-confirmation-modal');
     }
@@ -86,7 +88,7 @@ class Product extends Component
             ]
         ];
 
-        foreach($this->product->fields as $field) {
+        foreach ($this->product->fields as $field) {
             $rules['selectedOptions.' . $field->id] = [
                 'required',
                 'string',

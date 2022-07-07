@@ -10,15 +10,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
+use function Illuminate\Events\queueable;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail, IsActivitySubject
 {
-    use HasFactory, Notifiable, HasRoles, LogsActivity, CausesActivity;
+    use HasFactory, Notifiable, HasRoles, LogsActivity, CausesActivity, Billable;
 
     protected $with = [
         'discord'
@@ -28,7 +30,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, IsA
         'name',
         'email',
         'password',
-        'email_verified_at'
+        'email_verified_at',
+        'balance'
     ];
 
     protected $hidden = [
@@ -39,6 +42,15 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, IsA
     protected $casts = [
         'email_verified_at' => 'datetime'
     ];
+
+    protected static function booted()
+    {
+        static::updated(queueable(function($user) {
+            if ($user->hasStripeId()) {
+                $user->syncStripeCustomerDetails();
+            }
+        }));
+    }
 
     public function articles(): HasMany
     {
