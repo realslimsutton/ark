@@ -34,7 +34,7 @@ class DiscordController extends Controller
             $this->updateUser($user, $discord);
         }
 
-        Auth::login($user);
+        Auth::login($user, true);
 
         return redirect()->route('landing');
     }

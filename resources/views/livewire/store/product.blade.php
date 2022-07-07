@@ -37,25 +37,9 @@
                 </p>
             @endif
 
-            @foreach($product->fields as $field)
-                @if($field->in_table)
-                    @continue
-                @endif
-
-                @php
-                    $options = $field->options->filter(fn($option) => in_array($option->id, $field->pivot->config));
-                @endphp
-
-                @if($options->isEmpty())
-                    @continue
-                @endif
-
-                <x-store.horizontal-product-field :field="$field" :options="$options"/>
-            @endforeach
-
-            <div class="flex items-center justify-between">
+            <div class="divide-y divide-primary-accent">
                 @foreach($product->fields as $field)
-                    @if(!$field->in_table)
+                    @if($field->in_table)
                         @continue
                     @endif
 
@@ -67,8 +51,26 @@
                         @continue
                     @endif
 
-                    <x-store.vertical-product-field :field="$field" :options="$options"/>
+                    <x-store.horizontal-product-field :field="$field" :options="$options"/>
                 @endforeach
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 py-4">
+                    @foreach($product->fields as $field)
+                        @if(!$field->in_table)
+                            @continue
+                        @endif
+
+                        @php
+                            $options = $field->options->filter(fn($option) => in_array($option->id, $field->pivot->config));
+                        @endphp
+
+                        @if($options->isEmpty())
+                            @continue
+                        @endif
+
+                        <x-store.vertical-product-field :field="$field" :options="$options"/>
+                    @endforeach
+                </div>
             </div>
 
             <div class="w-full flex items-center justify-between flex-wrap mt-12">

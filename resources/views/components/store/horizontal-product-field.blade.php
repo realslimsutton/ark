@@ -1,13 +1,19 @@
 @props(['field', 'options'])
 
-<div class="flex items-center space-x-2">
+<div class="grid grid-cols-3 gap-4 py-4">
     @if($field->thumbnail !== null)
-        <div>
-            <img src="{{$field->thumbnail}}" alt="{{$field->name}}" />
+        <div class="col-span-1">
+            <img src="{{$field->thumbnail}}" alt="{{$field->name}}" class="w-full h-auto"/>
         </div>
     @endif
 
-    <div>
+    <div
+        @class([
+            'flex items-center',
+            'col-span-2' => $field->thumbnail !== null,
+            'col-span-3' => $field->thumbnail === null
+        ])
+    >
         <label class="text-white font-medium space-x-2">
             <span>
                 {{$field->name}}:

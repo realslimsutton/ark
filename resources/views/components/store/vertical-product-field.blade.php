@@ -1,21 +1,21 @@
 @props(['field', 'options'])
 
-<div class="flex flex-col items-center space-y-2">
+<div class="flex flex-col items-center space-y-2 pb-4 border-b border-primary-accent">
     @if($field->thumbnail !== null)
         <div>
-            <img src="{{$field->thumbnail}}" alt="{{$field->name}}" />
+            <img src="{{$field->thumbnail}}" alt="{{$field->name}}" class="w-full h-auto" />
         </div>
     @endif
 
-    <div>
-        <label class="text-white font-medium space-y-2 text-center">
+    <div class="w-full">
+        <label class="w-full text-white font-medium space-y-2 text-center">
             <span class="block">
                 {{$field->name}}:
             </span>
 
             <select
                 name="field-{{$field->id}}"
-                class="bg-primary-dark border border-primary-accent rounded text-white font-semibold transition duration-150 focus:ring-0 focus:border-secondary-light"
+                class="w-full bg-primary-dark border border-primary-accent rounded text-white font-semibold transition duration-150 focus:ring-0 focus:border-secondary-light"
                 wire:model.defer="selectedOptions.{{$field->id}}"
                 x-on:change="selectedOptions[{{$field->id}}] = getOptionPrice($event)"
             >
