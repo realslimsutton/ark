@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\DiscordController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
@@ -24,10 +25,9 @@ Route::get('/', [
     'index'
 ])->name('landing');
 
-Route::get('/test/{id}', [
-    TestController::class,
-    'show'
-])->name('test');
+Route::prefix('/news')->name('news.')->group(function () {
+    Route::get('/', [NewsController::class, 'index'])->name('index');
+});
 
 Route::middleware([
     'auth',

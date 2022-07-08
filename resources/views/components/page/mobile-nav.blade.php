@@ -24,7 +24,7 @@
         />
 
         <x-page.mobile-nav-item
-            to="#"
+            to="{{route('news.index')}}"
             label="NEWS"
             :active="str_starts_with(request()->route()->getName(), 'news')"
         />
