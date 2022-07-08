@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.0.2",
         "alexjustesen/filament-spatie-laravel-activitylog": "^0.3.0",
+        "awcodes/filament-tiptap-editor": "^0.3.5",
         "filament/filament": "^2.13",
         "filament/spatie-laravel-media-library-plugin": "^2.13",
         "filament/spatie-laravel-tags-plugin": "^2.13",

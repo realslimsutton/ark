@@ -119,7 +119,7 @@ class Article extends Model implements HasMedia, IsActivitySubject
     public function url(): Attribute
     {
         return Attribute::make(
-            get: fn() => '#'
+            get: fn() => route('news.show', [$this->slug])
         );
     }
 }

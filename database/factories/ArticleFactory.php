@@ -16,9 +16,6 @@ class ArticleFactory extends Factory
         $title = fake()->sentence();
 
         $content = collect($this->faker->paragraphs(rand(5, 15)))
-            ->map(function ($item) {
-                return "<p>$item</p>";
-            })
             ->join('');
 
         return [
@@ -27,7 +24,8 @@ class ArticleFactory extends Factory
             'summary' => fake()->paragraph,
             'content' => $content,
             'user_id' => 1,
-            'category_id' => rand(1, 10)
+            'category_id' => rand(1, 10),
+            'published_at' => now()
         ];
     }
 }

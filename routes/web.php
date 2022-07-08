@@ -26,7 +26,14 @@ Route::get('/', [
 ])->name('landing');
 
 Route::prefix('/news')->name('news.')->group(function () {
-    Route::get('/', [NewsController::class, 'index'])->name('index');
+    Route::get('/', [
+        NewsController::class,
+        'index'
+    ])->name('index');
+    Route::get('/{slug}', [
+        NewsController::class,
+        'show'
+    ])->name('show');
 });
 
 Route::middleware([

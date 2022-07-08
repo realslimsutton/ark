@@ -17,4 +17,15 @@ class NewsController extends Controller
             'articles' => $articles
         ]);
     }
+
+    public function show($slug)
+    {
+        $article = Article::query()
+            ->where('slug', '=', $slug)
+            ->firstOrFail();
+
+        return view('news.show', [
+            'article' => $article
+        ]);
+    }
 }

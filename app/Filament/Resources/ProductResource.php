@@ -12,6 +12,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Carbon;
@@ -42,7 +43,7 @@ class ProductResource extends Resource
                         Forms\Components\TextInput::make('slug')
                             ->required()
                             ->unique(Product::class, 'slug', fn($record) => $record),
-                        Forms\Components\MarkdownEditor::make('description')
+                        TiptapEditor::make('description')
                             ->columnSpan([
                                 'sm' => 2
                             ]),

@@ -13,6 +13,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\TextColumn;
+use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Carbon;
@@ -41,12 +42,12 @@ class ArticleResource extends Resource
                         Forms\Components\TextInput::make('slug')
                             ->required()
                             ->unique(Article::class, 'slug', fn($record) => $record),
-                        Forms\Components\MarkdownEditor::make('summary')
+                        TiptapEditor::make('summary')
                             ->required()
                             ->columnSpan([
                                 'sm' => 2
                             ]),
-                        Forms\Components\MarkdownEditor::make('content')
+                        TiptapEditor::make('content')
                             ->required()
                             ->columnSpan([
                                 'sm' => 2

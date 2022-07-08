@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d8170b3a85cca4c77510ac61dd84403c",
+    "content-hash": "9a0c2e109c5e0f0f503146e5f8957c0b",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -153,6 +153,63 @@
                 }
             ],
             "time": "2022-05-14T10:32:13+00:00"
+        },
+        {
+            "name": "awcodes/filament-tiptap-editor",
+            "version": "v0.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/awcodes/filament-tiptap-editor.git",
+                "reference": "c96b8cba31cb339228706e0a88235f560508be73"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/awcodes/filament-tiptap-editor/zipball/c96b8cba31cb339228706e0a88235f560508be73",
+                "reference": "c96b8cba31cb339228706e0a88235f560508be73",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^2.0",
+                "intervention/image": "^2.7",
+                "php": "^8.0.2",
+                "spatie/laravel-package-tools": "^1.9.2"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "FilamentTiptapEditor\\FilamentTiptapEditorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FilamentTiptapEditor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Weston",
+                    "email": "awcodes1@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Tiptap ingtegration for Filament Admin/Forms.",
+            "keywords": [
+                "filament",
+                "framework",
+                "laravel",
+                "tiptap"
+            ],
+            "support": {
+                "issues": "https://github.com/awcodes/filament-tiptap-editor/issues",
+                "source": "https://github.com/awcodes/filament-tiptap-editor/tree/v0.3.5"
+            },
+            "time": "2022-07-07T16:27:12+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",

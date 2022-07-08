@@ -61,10 +61,21 @@ button.bg-white,
 .filament-forms-tags-input-component > div,
 .filament-forms-tags-input-component input,
 .filament-forms-markdown-editor-component textarea,
-.filament-tables-search-input input {
+.filament-tables-search-input input,
+.tiptap-content,
+.tiptap-content > .ProseMirror {
     @apply bg-primary-dark !important;
     @apply border-primary-accent !important;
     @apply focus-within:border-secondary-light !important;
+}
+
+.tiptap-content, .tiptap-content > .ProseMirror {
+    @apply overflow-x-hidden !important;
+}
+
+.tiptap-editor, .tiptap-toolbar {
+    @apply border-primary-accent !important;
+    @apply divide-primary-accent !important;
 }
 
 .group-focus-within\:text-primary-500 {
