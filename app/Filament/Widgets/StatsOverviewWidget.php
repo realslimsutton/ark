@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use Akaunting\Money\Money;
+use App\Models\Order;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use DB;
@@ -24,7 +25,11 @@ class StatsOverviewWidget extends BaseWidget
 
     private function getPendingOrdersCard(): Card
     {
-        return Card::make('Pending orders', number_format(1340))
+        $count = Order::query()
+            ->whereNull('completed_at')
+            ->count();
+
+        return Card::make('Pending orders', number_format($count))
             ->description('Orders need fulfilling')
             ->url('#');
     }

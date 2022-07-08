@@ -10,6 +10,11 @@ class Role extends BaseRole
         'name',
         'title',
         'weight',
-        'colour'
+        'colour',
+        'requirement'
+    ];
+
+    protected $casts = [
+        'requirement' => 'integer'
     ];
 }

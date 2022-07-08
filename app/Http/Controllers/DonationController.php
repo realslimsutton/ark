@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Donation;
 use App\Models\DonationProduct;
 use App\Models\Order;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -70,9 +71,40 @@ class DonationController extends Controller
 
         $user->increment('balance', $total);
 
-        // TODO: Adjust role based on total donation
+        $this->updateUserRoles($user);
 
         return redirect()->route('store.index');
+    }
+
+    private function updateUserRoles(User $user): void
+    {
+        $roles = Role::query()
+            ->whereNotNull('requirement')
+            ->orderBy('weight')
+            ->get();
+
+        $currentRoles = $user->roles
+            ->filter(fn(Role $role) => $role->requirement !== null)
+            ->map(fn(Role $role) => $role->id);
+
+        $totalDonations = (int)$user->donations()
+            ->sum('total');
+
+        $highestRole = $roles->last(fn(Role $role) => $role->requirement < $totalDonations);
+
+        foreach ($roles as $role) {
+            if ($role->id === $highestRole->id) {
+                break;
+            }
+
+            if (!$currentRoles->contains($role->id)) {
+                continue;
+            }
+
+            $user->removeRole($role);
+        }
+
+        $user->assignRole($highestRole);
     }
 
     private function getTotal(Collection $products, array $amounts): int
@@ -81,6 +113,9 @@ class DonationController extends Controller
 
         foreach ($amounts as $id => $amount) {
             $product = $products->firstWhere('stripe_id', '=', $id);
+            if ($product === null) {
+                continue;
+            }
 
             $balance += $product->amount * $amount;
         }

@@ -53,6 +53,7 @@ class RolesPermissionsSeeder extends Seeder
                 'title' => 'Primitive',
                 'weight' => $weight++,
                 'colour' => '#808080',
+                'requirement' => 0,
                 'permissions' => []
             ],
             [
@@ -60,6 +61,7 @@ class RolesPermissionsSeeder extends Seeder
                 'title' => 'Ramshackle',
                 'weight' => $weight++,
                 'colour' => '#368A5E',
+                'requirement' => 9,
                 'permissions' => []
             ],
             [
@@ -67,6 +69,7 @@ class RolesPermissionsSeeder extends Seeder
                 'title' => 'Apprentice',
                 'weight' => $weight++,
                 'colour' => '#6362CE',
+                'requirement' => 19,
                 'permissions' => []
             ],
             [
@@ -74,6 +77,7 @@ class RolesPermissionsSeeder extends Seeder
                 'title' => 'Journeyman',
                 'weight' => $weight++,
                 'colour' => '#925CE2',
+                'requirement' => 29,
                 'permissions' => []
             ],
             [
@@ -81,6 +85,7 @@ class RolesPermissionsSeeder extends Seeder
                 'title' => 'Mastercraft',
                 'weight' => $weight++,
                 'colour' => '#DDDB69',
+                'requirement' => 39,
                 'permissions' => []
             ],
             [
@@ -88,6 +93,7 @@ class RolesPermissionsSeeder extends Seeder
                 'title' => 'Ascendant',
                 'weight' => $weight++,
                 'colour' => '#00FFE7',
+                'requirement' => 300,
                 'permissions' => []
             ],
             [

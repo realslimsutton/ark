@@ -16,8 +16,9 @@
 
                     <button
                         type="button"
-                        class="flex items-center text-white font-semibold truncate"
+                        class="flex items-center font-semibold truncate"
                         x-on:click="expanded = !expanded"
+                        style="color: {{auth()->user()->colour}};"
                     >
                         {{auth()->user()->name}}
                     </button>
@@ -36,6 +37,15 @@
                     style="display: none;"
                 >
                     <div class="py-1" role="none">
+                        <div
+                            class="w-full text-neutral-400 block px-4 py-2 font-medium select-none"
+                            style="color: {{auth()->user()->colour}};"
+                        >
+                            @if(auth()->user()->highest_role !== null)
+                                {{auth()->user()->highest_role->title}}
+                            @endif
+                        </div>
+
                         <div>
                             <a
                                 href="{{route('donate.index')}}"

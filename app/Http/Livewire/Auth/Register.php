@@ -12,7 +12,6 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\Rules;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Livewire\Component;
-use MartinRo\FilamentCharcountField\Components\CharcountedTextInput;
 use Phpsa\FilamentPasswordReveal\Password;
 
 class Register extends Component implements HasForms
@@ -62,25 +61,22 @@ class Register extends Component implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            CharcountedTextInput::make('name')
+            TextInput::make('name')
                 ->label('Username')
                 ->required()
                 ->maxLength(255)
-                ->maxCharacters(255)
                 ->unique('users', 'name'),
-            CharcountedTextInput::make('email')
+            TextInput::make('email')
                 ->label('Email address')
                 ->required()
                 ->maxLength(255)
-                ->maxCharacters(255)
                 ->email()
                 ->rules(['confirmed']),
-            CharcountedTextInput::make('email_confirmation')
+            TextInput::make('email_confirmation')
                 ->label('Confirm email address')
                 ->required()
                 ->email()
-                ->maxLength(255)
-                ->maxCharacters(255),
+                ->maxLength(255),
             Grid::make()
                 ->schema([
                     Password::make('password')

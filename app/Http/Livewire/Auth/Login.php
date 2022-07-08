@@ -11,7 +11,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Livewire\Component;
-use MartinRo\FilamentCharcountField\Components\CharcountedTextInput;
 use Phpsa\FilamentPasswordReveal\Password;
 
 class Login extends Component implements HasForms
@@ -76,11 +75,10 @@ class Login extends Component implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            CharcountedTextInput::make('email')
+            TextInput::make('email')
                 ->label('Email address')
                 ->required()
                 ->email()
-                ->maxCharacters(255)
                 ->maxLength(255),
             Password::make('password')
                 ->label('Password')

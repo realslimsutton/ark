@@ -57,7 +57,9 @@ class UserResource extends Resource
                         Forms\Components\TextInput::make('balance')
                             ->integer()
                             ->required()
-                            ->minValue(0)
+                            ->minValue(0),
+                        Forms\Components\MultiSelect::make('roles')
+                            ->relationship('roles', 'title')
                     ])
                     ->columns([
                         'sm' => 2

@@ -372,3 +372,11 @@ a.filament-stats-card:focus .text-gray-600 {
 .filament-forms-text-input-component .absolute .bg-white\/50 {
     @apply bg-primary-dark !important;
 }
+
+.choices[data-type="select-multiple"] .choices__inner > input {
+    @apply border-0 !important;
+}
+
+.choices__list--multiple .choices__item {
+    @apply text-secondary-light !important;
+}

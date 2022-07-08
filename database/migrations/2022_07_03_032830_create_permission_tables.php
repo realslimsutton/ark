@@ -44,6 +44,7 @@ class CreatePermissionTables extends Migration
             $table->string('title');
             $table->integer('weight');
             $table->string('colour');
+            $table->bigInteger('requirement')->nullable();
             $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
             $table->timestamps();
             if ($teams || config('permission.testing')) {

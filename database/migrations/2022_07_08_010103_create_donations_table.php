@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
-            $table->string('session_id')->index();
+            $table->string('session_id')->unique();
             $table->integer('total');
             $table->foreignId('user_id')->index()->constrained();
             $table->timestamps();

@@ -5,6 +5,7 @@ namespace App\Models;
 use AlexJustesen\FilamentSpatieLaravelActivitylog\Contracts\IsActivitySubject;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -83,5 +84,31 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, IsA
     public function getActivitySubjectDescription(Activity $activity): string
     {
         return $this->name;
+    }
+
+    public function highestRole(): Attribute
+    {
+        return Attribute::make(
+            get: function() {
+                return $this->roles
+                    ->sortBy(fn(Role $role) => $role->weight)
+                    ->last();
+            }
+        );
+    }
+
+    public function colour(): Attribute
+    {
+        return Attribute::make(
+            get: function() {
+                $role = $this->highest_role;
+
+                if($role === null || $role->colour === null) {
+                    return '#FFFFFF';
+                }
+
+                return $role->colour;
+            }
+        );
     }
 }
