@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -18,7 +19,7 @@ class DiscordController extends Controller
         return Socialite::driver('discord')->redirect();
     }
 
-    public function authenticate()
+    public function authenticate(CreatesNewUsers $createAction)
     {
         $discord = Socialite::driver('discord')->user();
 
@@ -27,7 +28,7 @@ class DiscordController extends Controller
             ->first();
 
         if ($user === null) {
-            $user = $this->createUser($discord);
+            $user = $this->createUser($discord, $createAction);
 
             event(new Registered($user));
         } else {
@@ -39,7 +40,7 @@ class DiscordController extends Controller
         return redirect()->route('landing');
     }
 
-    private function createUser(SocialiteUser $discord): User
+    private function createUser(SocialiteUser $discord, CreatesNewUsers $createAction): User
     {
         $discordUser = DiscordUser::query()
             ->with('user')
@@ -67,6 +68,10 @@ class DiscordController extends Controller
             'discriminator' => $discord->user['discriminator'],
             'avatar' => $discord->avatar
         ]);
+
+        $user->assignRole('primitive');
+
+        event(new Registered($user));
 
         return $user;
     }
