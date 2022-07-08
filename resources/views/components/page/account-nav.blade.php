@@ -38,7 +38,7 @@
                     <div class="py-1" role="none">
                         <div>
                             <a
-                                href="#"
+                                href="{{route('donate.index')}}"
                                 @class([
                                     'w-full text-neutral-400 block px-4 py-2 transition duration-150 hover:text-white focus:text-white font-medium',
                                     'text-left hover:bg-secondary-light focus:bg-secondary-dark' => !$mobile,

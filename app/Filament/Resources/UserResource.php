@@ -8,12 +8,16 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Pages\Page;
 use Filament\Resources\Form;
+use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Hash;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Phpsa\FilamentPasswordReveal\Password;
 
 class UserResource extends Resource
 {
@@ -40,6 +44,15 @@ class UserResource extends Resource
                             ->required()
                             ->email()
                             ->unique(User::class, 'email', fn($record) => $record),
+                        Password::make('password')
+                            ->dehydrateStateUsing(fn($state) => Hash::make($state))
+                            ->dehydrated(fn($state) => filled($state))
+                            ->required(fn(Page $livewire): bool => $livewire instanceof CreateRecord),
+                        Password::make('password_confirmation'),
+                        Forms\Components\TextInput::make('balance')
+                            ->integer()
+                            ->required()
+                            ->minValue(0)
                     ])
                     ->columns([
                         'sm' => 2
@@ -50,7 +63,10 @@ class UserResource extends Resource
 
                 Forms\Components\Card::make()
                     ->schema([
-                        Forms\Components\SpatieMediaLibraryFileUpload::make('thumbnail'),
+                        Forms\Components\Placeholder::make('discord')
+                            ->label('Connected to Discord')
+                            ->hiddenOn(Pages\CreateUser::class)
+                            ->content(fn(User $record): string => $record->discord !== null ? 'Yes' : 'No'),
                         Forms\Components\Placeholder::make('created_at')
                             ->label('Created at')
                             ->content(fn(?User $record): string => $record?->created_at?->diffForHumans() ?? '-'),

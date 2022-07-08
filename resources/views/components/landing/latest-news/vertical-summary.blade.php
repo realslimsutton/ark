@@ -3,16 +3,16 @@
 <div>
     <div>
         <div>
-            <img src="{{$post['large_thumbnail']}}" class="h-auto w-full rounded-t"/>
+            <img src="{{$post->large_thumbnail}}" class="h-auto w-full rounded-t"/>
         </div>
 
         <div class="space-y-2 p-4">
             <h3 class="text-white font-semibold uppercase">
-                {{$post['title']}}
+                {{$post->title}}
             </h3>
 
             <p class="text-neutral-400 mb-4">
-                {{$post['summary']}}
+                {{$post->summary}}
             </p>
         </div>
     </div>
@@ -37,12 +37,12 @@
             </span>
 
             <span>
-                {{$post['created_at']->format('M d, Y')}}
+                {{$post->created_at->format('M d, Y')}}
             </span>
         </p>
 
         <a
-            href="#"
+            href="{{$post->url}}"
             class="bg-primary-default p-2 rounded text-white font-semibold uppercase text-sm transition duration-150 hover:bg-secondary-light focus:bg-secondary-dark"
         >
             READ MORE

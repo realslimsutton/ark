@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use App\Models\Donation;
+use App\Models\OrderProduct;
+use App\Models\Product;
+use DB;
 use Illuminate\Support\Collection;
 
 class LandingController extends Controller
@@ -9,53 +14,67 @@ class LandingController extends Controller
     public function index()
     {
         return view('index', [
-            'latestNews' => $this->getLatestNews()
+            'latestNews' => $this->getLatestNews(),
+            'bestSelling' => $this->getBestSellingProducts(),
+            'topDonators' => $this->getTopDonators()
         ]);
     }
 
     private function getLatestNews(): Collection
     {
-        $post = [
-            'title' => 'SMELL MAGIC IN THE AIR. OR MAYBE A BARBECUE',
-            'summary' => 'With what mingled joy and sorrow do I take up the pen to write',
-            'small_thumbnail' => 'https://html.nkdev.info/goodgames/assets/images/post-1-sm.jpg',
-            'large_thumbnail' => 'https://html.nkdev.info/goodgames/assets/images/post-1.jpg',
-            'created_at' => today()
-        ];
+        return Article::query()
+            ->with([
+                'category',
+                'media' => function ($query) {
+                    $query->where('collection_name', '=', 'thumbnail');
+                }
+            ])
+            ->orderByDesc('created_at')
+            ->limit(8)
+            ->get();
+    }
 
-        return collect([
-            [
-                'id' => 1,
-                ...$post
-            ],
-            [
-                'id' => 2,
-                ...$post
-            ],
-            [
-                'id' => 3,
-                ...$post
-            ],
-            [
-                'id' => 4,
-                ...$post
-            ],
-            [
-                'id' => 5,
-                ...$post
-            ],
-            [
-                'id' => 6,
-                ...$post
-            ],
-            [
-                'id' => 7,
-                ...$post
-            ],
-            [
-                'id' => 8,
-                ...$post
-            ]
-        ]);
+    private function getBestSellingProducts(): Collection
+    {
+        $limit = 9;
+
+        $counts = DB::table('order_product')
+            ->groupBy('product_id')
+            ->select('product_id', DB::raw('count(*) as count'))
+            ->orderByDesc('count')
+            ->limit($limit)
+            ->get();
+
+        $products = Product::query()
+            ->whereIn('id', $counts->map(fn($entry) => $entry->product_id))
+            ->get();
+
+        $limit -= $products->count();
+
+        if ($limit === 0) {
+            return $products;
+        }
+
+        $latestProducts = Product::query()
+            ->whereNotIn('id', $products->map(fn(Product $product) => $product->id))
+            ->whereNotNull('published_at')
+            ->orderByDesc('published_at')
+            ->limit($limit)
+            ->get();
+
+        return $products->concat($latestProducts);
+    }
+
+    private function getTopDonators()
+    {
+        $totals = Donation::query()
+            ->with('user')
+            ->select('user_id', DB::raw('SUM(total) as sum'))
+            ->groupBy('user_id')
+            ->orderByDesc('sum')
+            ->limit(5)
+            ->get();
+
+        return $totals->map(fn(Donation $donation) => $donation->user);
     }
 }

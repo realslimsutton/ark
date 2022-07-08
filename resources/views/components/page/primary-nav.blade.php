@@ -7,7 +7,7 @@
         />
 
         <x-page.primary-nav-item
-            to="#"
+            to="{{route('donate.index')}}"
             label="DONATE"
             :active="str_starts_with(request()->route()->getName(), 'donate')"
         />

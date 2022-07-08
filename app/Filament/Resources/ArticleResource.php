@@ -41,6 +41,11 @@ class ArticleResource extends Resource
                         Forms\Components\TextInput::make('slug')
                             ->required()
                             ->unique(Article::class, 'slug', fn($record) => $record),
+                        Forms\Components\MarkdownEditor::make('summary')
+                            ->required()
+                            ->columnSpan([
+                                'sm' => 2
+                            ]),
                         Forms\Components\MarkdownEditor::make('content')
                             ->required()
                             ->columnSpan([

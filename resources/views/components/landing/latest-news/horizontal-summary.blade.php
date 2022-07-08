@@ -11,20 +11,20 @@
 >
     <div>
         <img
-            src="{{$post['small_thumbnail']}}"
+            src="{{$post->small_thumbnail}}"
             class="h-auto w-24 w-full rounded"
         />
     </div>
 
     <div class="truncate">
         <h3 class="text-white font-semibold uppercase truncate">
-            {{$post['title']}}
+            {{$post->title}}
         </h3>
 
         <p
             class="text-neutral-400 mb-4 truncate"
             x-bind:class="activePostIndex === {{$loop->index}} ? '!text-white' : ''">
-            {{$post['summary']}}
+            {{$post->summary}}
         </p>
 
         <p class="flex items-center space-x-1 text-xs text-neutral-400 font-medium">
@@ -46,7 +46,7 @@
             </span>
 
             <span>
-                {{$post['created_at']->format('M d, Y')}}
+                {{$post->created_at->format('M d, Y')}}
             </span>
         </p>
     </div>

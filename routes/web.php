@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\DiscordController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DonationController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\TestController;
@@ -29,7 +30,8 @@ Route::get('/test/{id}', [
 ])->name('test');
 
 Route::middleware([
-    'auth'
+    'auth',
+    'verified'
 ])
     ->prefix('/store')
     ->name('store.')->group(function () {
@@ -57,6 +59,29 @@ Route::middleware([
             CartController::class,
             'success'
         ])->name('cart.check.out.success');
+    });
+
+Route::middleware([
+    'auth',
+    'verified'
+])
+    ->prefix('/donate')
+    ->name('donate.')
+    ->group(function () {
+        Route::get('/', [
+            DonationController::class,
+            'index'
+        ])->name('index');
+
+        Route::get('/product/{id}', [
+            DonationController::class,
+            'checkout'
+        ])->name('checkout');
+
+        Route::get('/checkout/success', [
+            DonationController::class,
+            'success'
+        ])->name('checkout.success');
     });
 
 Route::middleware('guest')->group(function () {

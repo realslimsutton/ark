@@ -12,6 +12,7 @@ use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Tags\HasTags;
 
 class Article extends Model implements HasMedia, IsActivitySubject
@@ -32,6 +33,12 @@ class Article extends Model implements HasMedia, IsActivitySubject
         'published_at' => 'datetime'
     ];
 
+    protected $appends = [
+        'large_thumbnail',
+        'small_thumbnail',
+        'url'
+    ];
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('thumbnail')
@@ -43,6 +50,17 @@ class Article extends Model implements HasMedia, IsActivitySubject
                 'image/webp'
             ])
             ->singleFile();
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('small')
+            ->width(95)
+            ->height(81);
+
+        $this->addMediaConversion('large')
+            ->width(1920)
+            ->height(1080);
     }
 
     public function user(): BelongsTo
@@ -58,6 +76,7 @@ class Article extends Model implements HasMedia, IsActivitySubject
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
+            ->logAll()
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
     }
@@ -67,11 +86,11 @@ class Article extends Model implements HasMedia, IsActivitySubject
         return $this->title;
     }
 
-    public function thumbnail(): Attribute
+    public function largeThumbnail(): Attribute
     {
         return Attribute::make(
             get: function () {
-                $thumbnail = $this->getFirstMediaUrl('thumbnail');
+                $thumbnail = $this->getFirstMediaUrl('thumbnail', 'large');
 
                 if (empty($thumbnail)) {
                     return null;
@@ -79,6 +98,28 @@ class Article extends Model implements HasMedia, IsActivitySubject
 
                 return $thumbnail;
             }
+        );
+    }
+
+    public function smallThumbnail(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $thumbnail = $this->getFirstMediaUrl('thumbnail', 'large');
+
+                if (empty($thumbnail)) {
+                    return null;
+                }
+
+                return $thumbnail;
+            }
+        );
+    }
+
+    public function url(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => '#'
         );
     }
 }

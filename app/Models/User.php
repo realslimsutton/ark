@@ -62,6 +62,11 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, IsA
         return $this->hasOne(DiscordUser::class);
     }
 
+    public function donations(): HasMany
+    {
+        return $this->hasMany(Donation::class);
+    }
+
     public function canAccessFilament(): bool
     {
         return $this->hasPermissionTo('view admin');
@@ -70,8 +75,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, IsA
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
+            ->logAll()
             ->logOnlyDirty()
-            ->logExcept(['password'])
             ->dontSubmitEmptyLogs();
     }
 

@@ -49,9 +49,12 @@
                 <div class="lg:col-span-2 flex items-center">
                     <div class="space-y-2">
                         <div class="flex items-center space-x-2">
-                            <h2 class="text-4xl text-white font-bold">
+                            <a
+                                href="{{route('store.show', [$product['slug']])}}"
+                                class="block text-4xl text-white font-bold"
+                            >
                                 {{$product['name']}}
-                            </h2>
+                            </a>
 
                             <h3
                                 class="text-2xl text-white font-semibold"

@@ -31,14 +31,14 @@
                         </svg>
                     </span>
 
-{{--                    <span x-html="posts[activePostIndex]['created_at']"></span>--}}
+                    {{--                    <span x-html="posts[activePostIndex]['created_at']"></span>--}}
 
                     <span>{{today()->format('M d, Y')}}</span>
                 </p>
 
                 <a
-                    href="#"
                     class="text-white font-semibold uppercase text-sm transition duration-150 hover:text-secondary-light focus:text-secondary-dark"
+                    x-bind:href="posts[activePostIndex]['url']"
                 >
                     READ MORE
                 </a>

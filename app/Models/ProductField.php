@@ -55,6 +55,7 @@ class ProductField extends Model implements HasMedia, IsActivitySubject
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
+            ->logAll()
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
     }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Str;
 
@@ -10,6 +11,16 @@ use Str;
  */
 class ProductFactory extends Factory
 {
+    public function configure()
+    {
+        return $this->afterCreating(function (Product $article) {
+            $article->addMediaFromUrl(
+                'https://cdn.pixabay.com/photo/2012/04/02/15/18/stegosaurus-24752_960_720.png'
+            )
+                ->toMediaCollection('thumbnail');
+        });
+    }
+
     /**
      * Define the model's default state.
      *
