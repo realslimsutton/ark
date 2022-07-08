@@ -9,6 +9,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Illuminate\Validation\Rules;
 use Livewire\Component;
+use MartinRo\FilamentCharcountField\Components\CharcountedTextInput;
 use Phpsa\FilamentPasswordReveal\Password;
 
 class ResetPassword extends Component implements HasForms
@@ -39,10 +40,12 @@ class ResetPassword extends Component implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            TextInput::make('email_label')
+            CharcountedTextInput::make('email_label')
                 ->label('Email address')
                 ->afterStateHydrated(fn($component) => $component->state(request()->input('email')))
-                ->disabled(),
+                ->disabled()
+            ->maxCharacters(255)
+            ->maxLength(255),
             Password::make('password')
                 ->label('Password')
                 ->extraInputAttributes(['name' => 'password'])

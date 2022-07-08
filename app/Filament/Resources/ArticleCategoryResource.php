@@ -14,6 +14,7 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use MartinRo\FilamentCharcountField\Components\CharcountedTextInput;
 
 class ArticleCategoryResource extends Resource
 {
@@ -33,8 +34,10 @@ class ArticleCategoryResource extends Resource
             ->schema([
                 Forms\Components\Card::make()
                     ->schema([
-                        Forms\Components\TextInput::make('title')
+                        CharcountedTextInput::make('title')
                             ->required()
+                            ->maxCharacters(255)
+                        ->maxLength(255)
                     ])
                     ->columns([
                         'sm' => 2

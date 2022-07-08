@@ -7,6 +7,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Livewire\Component;
+use MartinRo\FilamentCharcountField\Components\CharcountedTextInput;
 
 class ForgotPassword extends Component implements HasForms
 {
@@ -39,11 +40,13 @@ class ForgotPassword extends Component implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            TextInput::make('email')
+            CharcountedTextInput::make('email')
                 ->label('Email address')
                 ->required()
                 ->email()
                 ->extraInputAttributes(['name' => 'email'])
+                ->maxLength(255)
+                ->maxCharacters(255)
         ];
     }
 }

@@ -17,6 +17,7 @@ use Filament\Tables;
 use Hash;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use MartinRo\FilamentCharcountField\Components\CharcountedTextInput;
 use Phpsa\FilamentPasswordReveal\Password;
 
 class UserResource extends Resource
@@ -37,13 +38,17 @@ class UserResource extends Resource
             ->schema([
                 Forms\Components\Card::make()
                     ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->required(),
-                        Forms\Components\TextInput::make('email')
+                        CharcountedTextInput::make('name')
+                            ->required()
+                            ->maxCharacters(255)
+                            ->maxLength(255),
+                        CharcountedTextInput::make('email')
                             ->label('Email address')
                             ->required()
                             ->email()
-                            ->unique(User::class, 'email', fn($record) => $record),
+                            ->unique(User::class, 'email', fn($record) => $record)
+                            ->maxLength(255)
+                            ->maxCharacters(255),
                         Password::make('password')
                             ->dehydrateStateUsing(fn($state) => Hash::make($state))
                             ->dehydrated(fn($state) => filled($state))

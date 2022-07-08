@@ -9,6 +9,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use MartinRo\FilamentCharcountField\Components\CharcountedTextInput;
 
 class ProductsRelationManager extends RelationManager
 {
@@ -20,9 +21,10 @@ class ProductsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                CharcountedTextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->maxCharacters(255)
             ]);
     }
 

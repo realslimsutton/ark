@@ -31,27 +31,6 @@ class AuditResource extends Resource
 
     protected static ?string $navigationGroup = 'Management';
 
-//    public static function form(Form $form): Form
-//    {
-//        return $form
-//            ->schema([
-//                Forms\Components\TextInput::make('causer_type')
-//                    ->label('Causer type'),
-//                Forms\Components\TextInput::make('causer_id')
-//                    ->label('Causer id'),
-//                Forms\Components\TextInput::make('subject_type')
-//                    ->label('Subject type'),
-//                Forms\Components\TextInput::make('subject_id')
-//                    ->label('Subject id'),
-//                Forms\Components\TextInput::make('description')
-//                    ->label('Description'),
-//                Forms\Components\KeyValue::make('properties.attributes')
-//                    ->label('New data'),
-//                Forms\Components\KeyValue::make('properties.old')
-//                    ->label('Old data')
-//            ]);
-//    }
-
     public static function form(Form $form): Form
     {
         return $form

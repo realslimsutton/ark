@@ -20,6 +20,7 @@
         "laravel/framework": "^9.19",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
+        "martin-ro/filament-charcount-field": "^0.1.5",
         "phpsa/filament-password-reveal": "^1.1",
         "shuvroroy/filament-spatie-laravel-backup": "^1.2",
         "shuvroroy/filament-spatie-laravel-health": "^1.4",

@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use MartinRo\FilamentCharcountField\Components\CharcountedTextInput;
 
 class ArticlesRelationManager extends RelationManager
 {
@@ -27,13 +28,17 @@ class ArticlesRelationManager extends RelationManager
             ->schema([
                 Forms\Components\Grid::make()
                     ->schema([
-                        Forms\Components\TextInput::make('title')
+                        CharcountedTextInput::make('title')
                             ->required()
                             ->reactive()
+                            ->maxLength(255)
+                            ->maxCharacters(255)
                             ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
-                        Forms\Components\TextInput::make('slug')
+                        CharcountedTextInput::make('slug')
                             ->required()
-                            ->unique(Article::class, 'slug', fn($record) => $record),
+                            ->unique(Article::class, 'slug', fn($record) => $record)
+                        ->maxLength(255)
+                        ->maxCharacters(255),
                         TiptapEditor::make('content')
                             ->required()
                             ->columnSpan([

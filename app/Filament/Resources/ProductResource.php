@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use MartinRo\FilamentCharcountField\Components\CharcountedTextInput;
 
 class ProductResource extends Resource
 {
@@ -36,19 +37,23 @@ class ProductResource extends Resource
             ->schema([
                 Forms\Components\Card::make()
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        CharcountedTextInput::make('name')
                             ->required()
                             ->reactive()
+                            ->maxLength(255)
+                            ->maxCharacters(255)
                             ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
-                        Forms\Components\TextInput::make('slug')
+                        CharcountedTextInput::make('slug')
                             ->required()
+                            ->maxLength(255)
+                            ->maxCharacters(255)
                             ->unique(Product::class, 'slug', fn($record) => $record),
                         TiptapEditor::make('description')
                             ->columnSpan([
                                 'sm' => 2
                             ]),
                         Forms\Components\TextInput::make('price')
-                            ->numeric()
+                            ->integer()
                             ->required()
                             ->minValue(0),
                         Forms\Components\Select::make('category_id')

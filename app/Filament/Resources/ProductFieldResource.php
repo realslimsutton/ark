@@ -13,6 +13,7 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use MartinRo\FilamentCharcountField\Components\CharcountedTextInput;
 
 class ProductFieldResource extends Resource
 {
@@ -34,8 +35,10 @@ class ProductFieldResource extends Resource
             ->schema([
                 Forms\Components\Card::make()
                     ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->required(),
+                        CharcountedTextInput::make('name')
+                            ->required()
+                        ->maxCharacters(255)
+                        ->maxLength(255),
                         Forms\Components\Checkbox::make('in_table')
                             ->label('Show in the table')
                             ->helperText('The field will appear at the bottom of the product page in a table')

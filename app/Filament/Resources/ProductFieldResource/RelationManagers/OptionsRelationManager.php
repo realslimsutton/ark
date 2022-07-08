@@ -10,6 +10,7 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use MartinRo\FilamentCharcountField\Components\CharcountedTextInput;
 
 class OptionsRelationManager extends RelationManager
 {
@@ -21,14 +22,16 @@ class OptionsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                CharcountedTextInput::make('name')
                     ->required()
                     ->maxLength(255)
+                    ->maxCharacters(255)
                     ->reactive()
                     ->afterStateUpdated(fn($state, callable $set) => $set('value', Str::slug($state))),
-                Forms\Components\TextInput::make('value')
+                CharcountedTextInput::make('value')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                ->maxCharacters(255),
                 Forms\Components\TextInput::make('additional_price')
                     ->integer()
                     ->required()

@@ -368,3 +368,7 @@ a.filament-stats-card:focus .text-gray-600 {
     @apply flex !important;
     @apply items-center !important;
 }
+
+.filament-forms-text-input-component .absolute .bg-white\/50 {
+    @apply bg-primary-dark !important;
+}
