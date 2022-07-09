@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('donations', function (Blueprint $table) {
+        Schema::create('vaults', function (Blueprint $table) {
             $table->id();
-            $table->string('session_id')->unique();
-            $table->integer('total')->index();
-            $table->foreignId('user_id')->index()->constrained();
+            $table->string('title')->unique();
+            $table->timestamp('expires_at')->nullable();
+            $table->foreignId('order_id')->index()->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('donations');
+        Schema::dropIfExists('vaults');
     }
 };

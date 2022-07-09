@@ -8,6 +8,12 @@ class OrderProduct extends Pivot
 {
     public $timestamps = false;
 
+    public $incrementing = true;
+
+    protected $fillable = [
+        'options'
+    ];
+
     protected $casts = [
         'options' => 'array'
     ];

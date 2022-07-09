@@ -37,8 +37,8 @@ class ProductFieldResource extends Resource
                     ->schema([
                         CharcountedTextInput::make('name')
                             ->required()
-                        ->maxCharacters(255)
-                        ->maxLength(255),
+                            ->maxCharacters(255)
+                            ->maxLength(255),
                         Forms\Components\Checkbox::make('in_table')
                             ->label('Show in the table')
                             ->helperText('The field will appear at the bottom of the product page in a table')
@@ -52,8 +52,6 @@ class ProductFieldResource extends Resource
 
                 Forms\Components\Card::make()
                     ->schema([
-                        Forms\Components\SpatieMediaLibraryFileUpload::make('thumbnail')
-                            ->collection('thumbnail'),
                         Forms\Components\Placeholder::make('created_at')
                             ->label('Created at')
                             ->content(fn(?ProductField $record): string => $record?->created_at?->diffForHumans() ?? '-'),

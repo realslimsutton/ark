@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use Akaunting\Money\Money;
 use App\Models\Order;
+use App\Models\Vault;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use DB;
@@ -31,7 +32,7 @@ class StatsOverviewWidget extends BaseWidget
 
         return Card::make('Pending orders', number_format($count))
             ->description('Orders need fulfilling')
-            ->url('#');
+            ->url(route('filament.resources.store/orders.index'));
     }
 
     private function getRevenueCard(): Card

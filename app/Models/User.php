@@ -46,7 +46,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, IsA
 
     protected static function booted()
     {
-        static::updated(queueable(function($user) {
+        static::updated(queueable(function ($user) {
             if ($user->hasStripeId()) {
                 $user->syncStripeCustomerDetails();
             }
@@ -66,6 +66,21 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, IsA
     public function donations(): HasMany
     {
         return $this->hasMany(Donation::class);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function completedOrders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'completed_by');
+    }
+
+    public function vaults()
+    {
+        return $this->hasManyThrough(Vault::class, Order::class);
     }
 
     public function canAccessFilament(): bool
@@ -89,7 +104,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, IsA
     public function highestRole(): Attribute
     {
         return Attribute::make(
-            get: function() {
+            get: function () {
                 return $this->roles
                     ->sortBy(fn(Role $role) => $role->weight)
                     ->last();
@@ -100,10 +115,10 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, IsA
     public function colour(): Attribute
     {
         return Attribute::make(
-            get: function() {
+            get: function () {
                 $role = $this->highest_role;
 
-                if($role === null || $role->colour === null) {
+                if ($role === null || $role->colour === null) {
                     return '#FFFFFF';
                 }
 

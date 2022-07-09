@@ -65,7 +65,7 @@ Route::middleware([
         Route::get('/cart/success', [
             CartController::class,
             'success'
-        ])->name('cart.check.out.success');
+        ])->name('cart.checkout.success');
     });
 
 Route::middleware([

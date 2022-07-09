@@ -18,15 +18,17 @@ class DonationProductResource extends Resource
 {
     protected static ?string $model = DonationProduct::class;
 
-    protected static ?string $slug = 'store/donations';
+    protected static ?string $slug = 'management/stripe';
 
-    protected static ?string $label = 'Donations';
+    protected static ?string $label = 'Stripe';
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $pluralLabel = 'Stripe';
 
-    protected static ?string $navigationGroup = 'Store';
+    protected static ?string $navigationIcon = 'heroicon-o-currency-pound';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?string $navigationGroup = 'Management';
+
+    protected static ?int $navigationSort = 5;
 
     public static function table(Table $table): Table
     {

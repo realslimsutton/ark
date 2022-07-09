@@ -65,7 +65,9 @@ class Product extends Model implements HasMedia
 
     public function orders(): BelongsToMany
     {
-        return $this->belongsToMany(Order::class)->using(OrderProduct::class);
+        return $this->belongsToMany(Order::class)
+            ->using(OrderProduct::class)
+            ->withPivot('options');
     }
 
     public function getActivitylogOptions(): LogOptions

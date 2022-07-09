@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductField;
+use App\Models\Vault;
 use App\Support\Cart;
 use DB;
 use Illuminate\Http\Request;
@@ -41,14 +42,18 @@ class CartController extends Controller
 
         $total = collect($this->getProductTotals($cart, $products))->sum();
 
-        if ($request->user()->balance < $total) {
+        $user = $request->user();
+
+        if ($user->balance < $total) {
             return redirect()->route('store.cart.show')
                 ->withErrors([
                     'cart' => 'Insufficient balance to complete transaction'
                 ]);
         }
 
-        $order = Order::create();
+        $order = Order::create([
+            'user_id' => $user->id
+        ]);
 
         foreach ($cart as $entry) {
             for ($i = 0; $i < $entry['quantity']; $i++) {
@@ -56,13 +61,25 @@ class CartController extends Controller
             }
         }
 
-        $request->user()->decrement('balance', $total);
+        $user->decrement('balance', $total);
+
+        $vault = Vault::query()
+            ->whereRaw(DB::raw('(order_id IS NULL OR (expires_at IS NULL or expires_at <= NOW()))'))
+            ->first();
+
+        if ($vault !== null) {
+            $order->vault()->save($vault);
+
+            $vault
+                ->forceFill(['expires_at' => now()->addDays(7)])
+                ->save();
+        }
 
         Cart::clear();
 
         Session::flash('cart.checkout');
 
-        return redirect()->route('landing');
+        return redirect()->route('store.cart.checkout.success');
     }
 
     public function success()
