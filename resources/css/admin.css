@@ -380,3 +380,8 @@ a.filament-stats-card:focus .text-gray-600 {
 .choices__list--multiple .choices__item {
     @apply text-secondary-light !important;
 }
+
+.filament-dashboard-page .filament-tables-component,
+.filament-dashboard-page .filament-tables-container {
+    @apply rounded-xl !important;
+}

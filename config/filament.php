@@ -1,5 +1,6 @@
 <?php
 
+use App\Filament\Widgets\IncompleteOrders;
 use App\Filament\Widgets\StatsOverviewWidget;
 use App\Filament\Widgets\TotalDonationsWidget;
 use App\Filament\Widgets\ApplicationStatisticsWidget;
@@ -145,7 +146,8 @@ return [
         'namespace' => 'App\\Filament\\Widgets',
         'path' => null,
         'register' => [
-            StatsOverviewWidget::class
+            StatsOverviewWidget::class,
+            IncompleteOrders::class
         ],
     ],
 
