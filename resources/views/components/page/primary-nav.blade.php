@@ -26,12 +26,6 @@
 
         <x-page.primary-nav-item
             to="#"
-            label="TRADING"
-            :active="str_starts_with(request()->route()->getName(), 'trading')"
-        />
-
-        <x-page.primary-nav-item
-            to="#"
             label="SUPPORT"
             :active="str_starts_with(request()->route()->getName(), 'support')"
         />
