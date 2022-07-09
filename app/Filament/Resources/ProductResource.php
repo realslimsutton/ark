@@ -74,7 +74,8 @@ class ProductResource extends Resource
 
                                 $parsedState = Carbon::parse($state);
 
-                                if ($record->published_at !== null
+                                if ($record !== null
+                                    && $record->published_at !== null
                                     && $parsedState->equalTo($record->published_at)) {
                                     return $parsedState;
                                 }
@@ -98,7 +99,8 @@ class ProductResource extends Resource
 
                                 $parsedState = Carbon::parse($state);
 
-                                if ($record->expires_at !== null
+                                if ($record !== null
+                                    && $record->expires_at !== null
                                     && $parsedState->equalTo($record->expires_at)) {
                                     return $parsedState;
                                 }

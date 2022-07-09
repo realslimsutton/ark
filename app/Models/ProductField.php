@@ -29,15 +29,14 @@ class ProductField extends Model implements HasMedia, IsActivitySubject
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('thumbnail')
+        $this->addMediaCollection('thumbnails')
             ->acceptsMimeTypes([
                 'image/gif',
                 'image/jpeg',
                 'image/png',
                 'image/svg+xml',
                 'image/webp'
-            ])
-            ->singleFile();
+            ]);
     }
 
     public function products(): BelongsToMany
@@ -65,18 +64,14 @@ class ProductField extends Model implements HasMedia, IsActivitySubject
         return $this->name;
     }
 
-    public function thumbnail(): Attribute
+    public function getThumbnail(int|Product $product, string $conversionName = ''): ?string
     {
-        return Attribute::make(
-            get: function () {
-                $thumbnail = $this->getFirstMediaUrl('thumbnail');
+        $id = $product instanceof Product ? $product->id : $product;
 
-                if (empty($thumbnail)) {
-                    return null;
-                }
+        $media = $this->getMedia('thumbnails', [
+            'product' => $id
+        ])->first();
 
-                return $thumbnail;
-            }
-        );
+        return $media?->getUrl($conversionName);
     }
 }

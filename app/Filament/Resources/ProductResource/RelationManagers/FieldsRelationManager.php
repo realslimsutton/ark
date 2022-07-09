@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\ProductResource\RelationManagers;
 
-use App\Filament\Actions\AttachButton;
-use App\Forms\Components\CheckboxListChecked;
+use App\Filament\Fields\MediaLibrary;
+use App\Models\ProductField;
 use Filament\Forms;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
@@ -25,6 +26,18 @@ class FieldsRelationManager extends RelationManager
     {
         return $form
             ->schema([
+                MediaLibrary::make('thumbnails')
+                    ->filters(function (MediaLibrary $component) {
+                        return [
+                            'product' => $component->getLivewire()->ownerRecord->id
+                        ];
+                    })
+                    ->customProperties(function (MediaLibrary $component) {
+                        return [
+                            'product' => $component->getLivewire()->ownerRecord->id
+                        ];
+                    })
+                    ->collection('thumbnails'),
                 Forms\Components\CheckboxList::make('pivot.config')
                     ->disableLabel()
                     ->options(function ($record) {
@@ -55,7 +68,35 @@ class FieldsRelationManager extends RelationManager
                     ->button()
                     ->url(route('filament.resources.store/fields.create'))
                     ->openUrlInNewTab(),
-                AttachButton::make()
+                Tables\Actions\AttachAction::make()
+                    ->form(fn(Tables\Actions\AttachAction $action): array => [
+                        $action->getRecordSelect()
+                            ->reactive(),
+                        MediaLibrary::make('thumbnails')
+                            ->customProperties(function (MediaLibrary $component) {
+                                return [
+                                    'product' => $component->getLivewire()->ownerRecord->id
+                                ];
+                            })
+                            ->collection('thumbnails'),
+                        CheckboxList::make('config')
+                            ->label('Options')
+                            ->options(function ($get) {
+                                $id = $get('recordId');
+
+                                if ($id === null) {
+                                    return [];
+                                }
+
+                                $product = ProductField::find($id);
+
+                                return $product->options
+                                    ->mapWithKeys(fn($r) => [
+                                        $r['id'] => $r['name']
+                                    ])
+                                    ->all();
+                            })
+                    ])
             ])
             ->actions([
                 Tables\Actions\EditAction::make()

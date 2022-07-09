@@ -1,9 +1,13 @@
-@props(['field', 'options'])
+@props(['product', 'field', 'options'])
+
+@php
+    $thumbnail = $field->getThumbnail($product);
+@endphp
 
 <div class="flex flex-col items-center space-y-2 pb-4 border-b border-primary-accent">
-    @if($field->thumbnail !== null)
+    @if($thumbnail !== null)
         <div>
-            <img src="{{$field->thumbnail}}" alt="{{$field->name}}" class="w-full h-auto" />
+            <img src="{{$thumbnail}}" alt="{{$field->name}}" class="w-full h-auto" />
         </div>
     @endif
 

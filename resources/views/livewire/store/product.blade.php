@@ -33,7 +33,7 @@
 
             @if($product->description !== null)
                 <p class="text-white">
-                    {{$product->description}}
+                    {!! $product->description !!}
                 </p>
             @endif
 
@@ -51,7 +51,7 @@
                         @continue
                     @endif
 
-                    <x-store.horizontal-product-field :field="$field" :options="$options"/>
+                    <x-store.horizontal-product-field :product="$product" :field="$field" :options="$options"/>
                 @endforeach
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 py-4">
@@ -68,7 +68,7 @@
                             @continue
                         @endif
 
-                        <x-store.vertical-product-field :field="$field" :options="$options"/>
+                        <x-store.vertical-product-field :product="$product" :field="$field" :options="$options"/>
                     @endforeach
                 </div>
             </div>

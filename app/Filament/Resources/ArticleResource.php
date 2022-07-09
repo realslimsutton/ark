@@ -79,7 +79,8 @@ class ArticleResource extends Resource
 
                                 $parsedState = Carbon::parse($state);
 
-                                if ($record->published_at !== null
+                                if ($record !== null
+                                    && $record->published_at !== null
                                     && $parsedState->equalTo($record->published_at)) {
                                     return $parsedState;
                                 }

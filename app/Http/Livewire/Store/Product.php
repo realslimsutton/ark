@@ -6,7 +6,6 @@ use App\Models\Product as ProductModel;
 use App\Support\Cart;
 use DB;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\In;
 use Livewire\Component;
 use Livewire\ComponentConcerns\ValidatesInput;
 
@@ -31,6 +30,9 @@ class Product extends Component
                 'fields.options',
                 'media' => function ($query) {
                     $query->where('collection_name', '=', 'thumbnail');
+                },
+                'fields.media' => function ($query) {
+                    $query->where('collection_name', '=', 'thumbnails');
                 }
             ])
             ->where('slug', '=', $slug)

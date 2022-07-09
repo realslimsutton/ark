@@ -1,17 +1,21 @@
-@props(['field', 'options'])
+@props(['product', 'field', 'options'])
+
+@php
+    $thumbnail = $field->getThumbnail($product);
+@endphp
 
 <div class="grid grid-cols-3 gap-4 py-4">
-    @if($field->thumbnail !== null)
+    @if($thumbnail !== null)
         <div class="col-span-1">
-            <img src="{{$field->thumbnail}}" alt="{{$field->name}}" class="w-full h-auto"/>
+            <img src="{{$thumbnail}}" alt="{{$field->name}}" class="w-full h-auto"/>
         </div>
     @endif
 
     <div
         @class([
             'flex items-center',
-            'col-span-2' => $field->thumbnail !== null,
-            'col-span-3' => $field->thumbnail === null
+            'col-span-2' => $thumbnail !== null,
+            'col-span-3' => $thumbnail === null
         ])
     >
         <label class="text-white font-medium space-x-2">
