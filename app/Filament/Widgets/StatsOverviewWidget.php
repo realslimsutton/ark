@@ -19,8 +19,8 @@ class StatsOverviewWidget extends BaseWidget
     {
         return [
             $this->getPendingOrdersCard(),
-            $this->getRevenueCard(),
-            $this->getUserCard()
+            $this->getDonationsCard(),
+            $this->getUsersCard()
         ];
     }
 
@@ -35,24 +35,39 @@ class StatsOverviewWidget extends BaseWidget
             ->url(route('filament.resources.store/orders.index'));
     }
 
-    private function getRevenueCard(): Card
+    private function getDonationsCard(): Card
     {
-        return Card::make('Revenue', Money::GBP(0))
-            ->description('0% increase')
-            ->descriptionIcon('heroicon-s-trending-down')
-            ->chart([
-                7,
-                2,
-                10,
-                3,
-                15,
-                4,
-                17
-            ])
-            ->color('danger');
+        $donations = $this->getNewDonations();
+
+        $values = $donations->values();
+
+        $previous = $values->splice(29, 1)->first();
+        $current = $values->last();
+        $difference = $current - $previous;
+
+        $increase = $difference >= 0;
+        $difference = abs($difference);
+
+        return Card::make('New donations', number_format($current))
+            ->description(
+                $increase
+                    ? $difference . ' increase'
+                    : $difference . ' decrease'
+            )
+            ->descriptionIcon(
+                $increase
+                    ? 'heroicon-s-trending-up'
+                    : 'heroicon-s-trending-down'
+            )
+            ->chart($values->all())
+            ->color(
+                $increase
+                    ? 'success'
+                    : 'danger'
+            );
     }
 
-    private function getUserCard(): Card
+    private function getUsersCard(): Card
     {
         $users = $this->getNewUsers();
 
@@ -62,7 +77,7 @@ class StatsOverviewWidget extends BaseWidget
         $current = $values->last();
         $difference = $current - $previous;
 
-        $increase = $difference > 0;
+        $increase = $difference >= 0;
         $difference = abs($difference);
 
         return Card::make('New users', number_format($current))
@@ -109,5 +124,32 @@ class StatsOverviewWidget extends BaseWidget
         }
 
         return $allUsers;
+    }
+
+    private function getNewDonations(): Collection
+    {
+        $donations = DB::table('donations')
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as donations'))
+            ->whereRaw('created_at BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW()')
+            ->groupBy('date')
+            ->get()
+            ->collect()
+            ->mapWithKeys(fn($r) => [
+                $r->date => $r->donations
+            ]);
+
+        $allDonations = collect();
+
+        $today = CarbonImmutable::today();
+        $current = $today->subDays(30);
+        while ($current->lessThanOrEqualTo($today)) {
+            $key = $current->format('Y-m-d');
+
+            $allDonations->put($key, $donations->get($key, 0));
+
+            $current = $current->addDay();
+        }
+
+        return $allDonations;
     }
 }
