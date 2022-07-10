@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('discord_users', function (Blueprint $table) {
             $table->id();
-            $table->string('discord_id')->unique();
+            $table->unsignedBigInteger('discord_id')->unique();
             $table->string('discriminator');
             $table->text('avatar')->nullable();
             $table->foreignId('user_id')->index()->constrained()->cascadeOnDelete();
